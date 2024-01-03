@@ -48,8 +48,6 @@
     
     <title>
         
-            Archives | 
-        
         Hantian&#39;s blog
     </title>
 
@@ -215,7 +213,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Hantian&#39;s blog">
-    <meta name="msapplication-starturl" content="https://shihantian.github.io/archives/">
+    <meta name="msapplication-starturl" content="https://shihantian.github.io/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Hantian&#39;s blog">
@@ -230,13 +228,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="https://shihantian.github.io/archives/">
+    <meta property="og:url" content="https://shihantian.github.io/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Archives | Hantian&#39;s blog">
+    <meta property="og:title" content="Hantian&#39;s blog">
     <meta property="og:image" content="/img/kakashi_avatar.jpg">
     <meta property="og:description" content="record share progress">
     
 
+    
+        <meta property="article:published_time" content="Wed Jan 03 2024 23:30:52 GMT+0800">
+        <meta property="article:modified_time" content="Thu Jan 04 2024 02:07:19 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -244,13 +245,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://shihantian.github.io/archives/index.html" />
+        <link rel="canonical" href="https://shihantian.github.io/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://shihantian.github.io/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/index.html",
+    "headline": "",
+    "datePublished": "Wed Jan 03 2024 23:30:52 GMT+0800",
+    "dateModified": "Thu Jan 04 2024 02:07:19 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Shi Hantian",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/kakashi_avatar.jpg"
+        },
+        "description": "<font color = "black" size = 5>记录 &bull; 分享 &bull; 进步</font>"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Hantian&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/kakashi_avatar.jpg"
+        }
+    },
+    "keywords": "",
+    "description": "record share progress",
+}
+</script>
 
 
     
@@ -284,263 +315,316 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%BB%BA%E7%AB%8Bgithub%E5%85%B1%E6%9C%89%E4%BB%93%E5%BA%93%E4%BD%9C%E4%B8%BA%E5%9B%BE%E5%BA%8A"><span class="post-toc-number">2.</span> <span class="post-toc-text">建立github共有仓库作为图床</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BDPicGo%E6%8F%92%E4%BB%B6%E5%B9%B6%E5%81%9A%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="post-toc-number">3.</span> <span class="post-toc-text">下载PicGo插件并做相关配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%B3%E8%81%94%E5%9B%BE%E5%BA%8A%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">关联图床的配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96Token"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">如何获取Token</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%BE%E7%89%87%E8%BE%93%E5%87%BA%E5%92%8C%E4%B8%8A%E4%BC%A0%E6%A0%BC%E5%BC%8F%E9%85%8D%E7%BD%AE"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">图片输出和上传格式配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">输出格式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%9B%BE%E7%89%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%A0%BC%E5%BC%8F"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">图片文件名格式</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="post-toc-number">4.</span> <span class="post-toc-text">如何使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#References"><span class="post-toc-number">5.</span> <span class="post-toc-text">References</span></a></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/"></a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            使用VScode的PicGo插件搭建基于github的图床
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/" target="_self">Read more</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/kakashi_avatar.jpg" width="44px" height="44px" alt="Shi Hantian's avatar">
-            </div>
-            <div>
-                <strong>Shi Hantian</strong>
-                <span>Jan 03, 2024</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/"></a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            下载源码
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/" target="_self">Read more</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/kakashi_avatar.jpg" width="44px" height="44px" alt="Shi Hantian's avatar">
-            </div>
-            <div>
-                <strong>Shi Hantian</strong>
-                <span>Jan 03, 2024</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2023/12/28/%5BFPV%5D%E7%BD%91%E7%AB%99%E5%AF%BC%E8%88%AA/"></a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            穿越机相关站点导航
-...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2023/12/28/%5BFPV%5D%E7%BD%91%E7%AB%99%E5%AF%BC%E8%88%AA/" target="_self">Read more</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/kakashi_avatar.jpg" width="44px" height="44px" alt="Shi Hantian's avatar">
-            </div>
-            <div>
-                <strong>Shi Hantian</strong>
-                <span>Dec 28, 2023</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2023/12/27/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E7%9A%84Hexo%E6%8C%87%E4%BB%A4/"></a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2023/12/27/%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E7%9A%84Hexo%E6%8C%87%E4%BB%A4/" target="_self">Read more</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/kakashi_avatar.jpg" width="44px" height="44px" alt="Shi Hantian's avatar">
-            </div>
-            <div>
-                <strong>Shi Hantian</strong>
-                <span>Dec 27, 2023</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
     $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/kakashi_avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Shi Hantian</strong>
+        <span>Jan 03, 2024</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=&url=https://shihantian.github.io/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/index.html&pic=https://shihantian.github.io/img/kakashi_avatar.jpg&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=&url=https://shihantian.github.io/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/index.html&via=Shi Hantian" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://shihantian.github.io/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://shihantian.github.io/2024/01/03/%5BCS%5DPicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
     
 </div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>使用VScode的PicGo插件搭建基于github的图床</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>非众所周知，我是非常喜欢在笔记里面放截图的。之前我的markdown笔记里的图片都是放在和md文件相同的路径下，markdown代码像这样:</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-00-01-01.png" alt="[CS]PicGo图床配置-2024-01-04-00-01-01" width=70%" /> </p>
+
+<p>这倒还好，主要问题是每篇笔记都需要放在一个文件夹里，又由于我使用不同插件进行图片粘贴，于是一篇带图片的笔记文件长这样：</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-00-04-36.png" alt="[CS]PicGo图床配置-2024-01-04-00-04-36" width=70%" /> </p>
+
+<p>很不优雅。但是笔记图片添加方便、不影响笔记查看、图片文件都在本地倒也安心，就一直这么着了。</p>
+<p>然后我开始搭建自己的个人博客了，是基于Hexo框架搭建的，Hexo生成的HTML展示的网页可没法通过这样的路径找到本地的图片，线上图床成为刚需。</p>
+<p>那就搭建一个自己的线上图床。</p>
+<p>本博客环境：</p>
+<ul>
+<li>在VScode里编写markdown代码（也可以是Typora，Obsidian等）</li>
+<li>使用PicGo插件（也可以是PicGo客户端），</li>
+<li>搭建基于github的图床（也可以是阿里云，七牛云等）。</li>
+</ul>
+<h1 id="建立github共有仓库作为图床"><a href="#建立github共有仓库作为图床" class="headerlink" title="建立github共有仓库作为图床"></a>建立github共有仓库作为图床</h1><p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-00-30-15.png" alt="[CS]PicGo图床配置-2024-01-04-00-30-15" width=70%" /> </p>
+
+<h1 id="下载PicGo插件并做相关配置"><a href="#下载PicGo插件并做相关配置" class="headerlink" title="下载PicGo插件并做相关配置"></a>下载PicGo插件并做相关配置</h1><p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-00-31-41.png" alt="[CS]PicGo图床配置-2024-01-04-00-31-41" width=70%" /> </p>
+
+<p>打开PicGo的插件设置</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-00-38-32.png" alt="[CS]PicGo图床配置-2024-01-04-00-38-32" width=70%" /> </p>
+
+<h2 id="关联图床的配置"><a href="#关联图床的配置" class="headerlink" title="关联图床的配置"></a>关联图床的配置</h2><p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-00-40-08.png" alt="[CS]PicGo图床配置-2024-01-04-00-40-08" width=70%" /> </p>
+
+<p>逐个解释：</p>
+<ul>
+<li>Current:填github</li>
+<li>Branch:填主分支即可，若主分支是master就填master</li>
+<li>Custom Url: <code>https://cdn.jsdelivr.net/gh/用户名/仓库名@分支名</code> 如 <code>https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main</code></li>
+<li>Path:是指在仓库里面的路径。我是新建了一个名为blog的文件夹专门放博客图片，于是填写 <code>blog/</code> 注意要有斜杠才会放在这个文件夹里面</li>
+<li>Repo: <code>用户名/仓库名</code></li>
+<li>Token:进入链接<a target="_blank" rel="noopener" href="https://github.com/settings/tokens">https://github.com/settings/tokens</a>获取。</li>
+</ul>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-06-24.png" alt="[CS]PicGo图床配置-2024-01-04-01-06-24" width=70%" /> </p>
+
+<h3 id="如何获取Token"><a href="#如何获取Token" class="headerlink" title="如何获取Token"></a>如何获取Token</h3><p>点击Generate new token</p>
+<p>我们希望生成有效时间较长的token，否则总是更新PicGo配置会麻烦，但我们希望该token仅对图床仓库有效，否则有效时间很长的token会带来一些安全隐患。</p>
+<p>于是使用Beta版本的’New fine-grained personal access token’</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-20-45.png" alt="[CS]PicGo图床配置-2024-01-04-01-20-45" width=70%" /> </p>
+
+<p>我原来年限放的很长，但是要求我不得超过一年，于是改成 ‘2015&#x2F;01&#x2F;04’</p>
+<p>往下拉，Permissions可以很细地调，我们把Contents的许可改成Read and write即可。</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-29-31.png" alt="[CS]PicGo图床配置-2024-01-04-01-29-31" width=70%" /> </p>
+
+<p>点击generate生成</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-31-46.png" alt="[CS]PicGo图床配置-2024-01-04-01-31-46" width=70%" /> </p>
+
+<p>复制Token。注意Token只会展示一次，可以粘贴到记事本上做一个暂时的保存，或直接粘贴到PicGo扩展的配置里。</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-33-46.png" alt="[CS]PicGo图床配置-2024-01-04-01-33-46" width=70%" /> </p>
+
+<h2 id="图片输出和上传格式配置"><a href="#图片输出和上传格式配置" class="headerlink" title="图片输出和上传格式配置"></a>图片输出和上传格式配置</h2><h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>就是自动粘贴到markdown代码文件里的局部图片代码，效果如：</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-42-39.png" alt="[CS]PicGo图床配置-2024-01-04-01-42-39" width=70%" /> </p>
+
+<p>我的设置为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;$&#123;url&#125;&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;$&#123;uploadedName&#125;&quot;</span> <span class="attr">width</span>=<span class="string">70%</span>&quot; /&gt;</span> <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中使用了 <code>$&#123;url&#125;</code> <code>$&#123;uploadedName&#125;</code> 这样的动态占位，还有别的动态占位可以选择。我使用的是markdown兼容的html语法来表示图片，这样可以对图片的宽度位置等有一个更好的控制。也可以采用markdown最基本的图片语法，即：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">$&#123;uploadedName&#125;</span>](<span class="link">$&#123;url&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-38-26.png" alt="[CS]PicGo图床配置-2024-01-04-01-38-26" width=70%" /> </p>
+
+<h3 id="图片文件名格式"><a href="#图片文件名格式" class="headerlink" title="图片文件名格式"></a>图片文件名格式</h3><p>是对上传的图片的命名，效果如：</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-52-10.png" alt="[CS]PicGo图床配置-2024-01-04-01-52-10" width=70%" /> </p>
+
+<p>我的设置为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;mdFileName&#125;-$&#123;dateTime&#125;$&#123;extName&#125;</span><br></pre></td></tr></table></figure>
+
+<p>即‘笔记文件名-日期时间-图片后缀名’也可根据配置页面的选项进行diy</p>
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><ol>
+<li>当你正在VScode里快乐地编写markdown笔记代码</li>
+<li>复制想添加的图片到剪贴板</li>
+<li>将光标放在希望放置图片代码的位置</li>
+<li>默认快捷键 Ctrl+Alt+U, 同时完成图片上传和代码输出</li>
+</ol>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/">PicGo官方文档</a></li>
+</ul>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://shihantian.github.io/2024/01/03/[CS]PicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://shihantian.github.io/2024/01/03/[CS]PicGo%E5%9B%BE%E5%BA%8A%E9%85%8D%E7%BD%AE/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
