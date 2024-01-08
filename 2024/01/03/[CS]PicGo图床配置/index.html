@@ -82,7 +82,7 @@
 
     <!-- Import CSS -->
     
-        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?aweSyZS/7gSg5EaKVT5+7w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?uVzgA6RLrOm13Ukw8Qgy+A==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
@@ -556,19 +556,19 @@
 <p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-42-39.png" alt="[CS]PicGo图床配置-2024-01-04-01-42-39" width=70%" /> </p>
 
 <p>我的设置为：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;$&#123;url&#125;&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;$&#123;uploadedName&#125;&quot;</span> <span class="attr">width</span>=<span class="string">70%</span>&quot; /&gt;</span> <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="html">&lt;p align=&quot;center&quot;&gt; &lt;img src=&quot;$&#123;url&#125;&quot; alt=&quot;$&#123;uploadedName&#125;&quot; width=70%&quot; /&gt; &lt;/p&gt;
+</code></pre>
 <p>其中使用了 <code>$&#123;url&#125;</code> <code>$&#123;uploadedName&#125;</code> 这样的动态占位，还有别的动态占位可以选择。我使用的是markdown兼容的html语法来表示图片，这样可以对图片的宽度位置等有一个更好的控制。也可以采用markdown最基本的图片语法，即：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">$&#123;uploadedName&#125;</span>](<span class="link">$&#123;url&#125;</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="markdown">![$&#123;uploadedName&#125;]($&#123;url&#125;)
+</code></pre>
 <p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-38-26.png" alt="[CS]PicGo图床配置-2024-01-04-01-38-26" width=70%" /> </p>
 
 <h3 id="图片文件名格式"><a href="#图片文件名格式" class="headerlink" title="图片文件名格式"></a>图片文件名格式</h3><p>是对上传的图片的命名，效果如：</p>
 <p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[CS]PicGo图床配置-2024-01-04-01-52-10.png" alt="[CS]PicGo图床配置-2024-01-04-01-52-10" width=70%" /> </p>
 
 <p>我的设置为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;mdFileName&#125;-$&#123;dateTime&#125;$&#123;extName&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code>$&#123;mdFileName&#125;-$&#123;dateTime&#125;$&#123;extName&#125;
+</code></pre>
 <p>即‘笔记文件名-日期时间-图片后缀名’，也可根据配置页面的选项进行diy</p>
 <h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><ol>
 <li>当你正在VScode里快乐地编写markdown笔记代码</li>

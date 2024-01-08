@@ -48,7 +48,7 @@
     
     <title>
         
-            通过wifi刷写ELRS固件 | 
+            ELRS固件刷写 | 
         
         Hantian&#39;s blog
     </title>
@@ -82,7 +82,7 @@
 
     <!-- Import CSS -->
     
-        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?aweSyZS/7gSg5EaKVT5+7w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?uVzgA6RLrOm13Ukw8Qgy+A==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
@@ -232,14 +232,14 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://shihantian.github.io/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="通过wifi刷写ELRS固件 | Hantian&#39;s blog">
+    <meta property="og:title" content="ELRS固件刷写 | Hantian&#39;s blog">
     <meta property="og:image" content="/img/kakashi_avatar.jpg">
     <meta property="og:description" content="record share progress">
     <meta property="og:article:tag" content="FPV"> <meta property="og:article:tag" content="穿越机"> <meta property="og:article:tag" content="航模"> <meta property="og:article:tag" content="开源软件"> <meta property="og:article:tag" content="固件"> <meta property="og:article:tag" content="ELRS"> 
 
     
         <meta property="article:published_time" content="Wed Jan 03 2024 23:12:55 GMT+0800">
-        <meta property="article:modified_time" content="Mon Jan 08 2024 01:05:49 GMT+0800">
+        <meta property="article:modified_time" content="Tue Jan 09 2024 00:41:47 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -260,9 +260,9 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "mainEntityOfPage": "https://shihantian.github.io/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/index.html",
-    "headline": "通过wifi刷写ELRS固件",
+    "headline": "ELRS固件刷写",
     "datePublished": "Wed Jan 03 2024 23:12:55 GMT+0800",
-    "dateModified": "Mon Jan 08 2024 01:05:49 GMT+0800",
+    "dateModified": "Tue Jan 09 2024 00:41:47 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "Shi Hantian",
@@ -346,7 +346,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%BA%90%E7%A0%81"><span class="post-toc-number">1.</span> <span class="post-toc-text">下载源码</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BA%E4%BB%B6"><span class="post-toc-number">2.</span> <span class="post-toc-text">编译固件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%8A%E4%BC%A0%E5%B9%B6%E7%83%A7%E5%BD%95%E5%9B%BA%E4%BB%B6"><span class="post-toc-number">3.</span> <span class="post-toc-text">上传并烧录固件</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%9B%BA%E4%BB%B6%E6%BA%90%E7%A0%81"><span class="post-toc-number">1.</span> <span class="post-toc-text">下载固件源码</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BA%E4%BB%B6"><span class="post-toc-number">2.</span> <span class="post-toc-text">编译固件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85-ExpressLRS-configurator"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">安装 ExpressLRS configurator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BA%E4%BB%B6-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">编译固件</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%8A%E4%BC%A0%E5%B9%B6%E7%83%A7%E5%BD%95%E5%9B%BA%E4%BB%B6%EF%BC%88%E9%80%9A%E8%BF%87wifi%EF%BC%8C%E9%80%9A%E8%BF%87%E7%BD%91%E9%A1%B5%E7%AB%AF%EF%BC%89"><span class="post-toc-number">3.</span> <span class="post-toc-text">上传并烧录固件（通过wifi，通过网页端）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#wifi%E8%BF%9E%E6%8E%A5"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">wifi连接</span></a></li></ol></li></ol>
     </ul>
     
 
@@ -378,7 +378,7 @@
         
     
             <p class="article-headline-p">
-                通过wifi刷写ELRS固件
+                ELRS固件刷写
             </p>
         </div>
 
@@ -450,7 +450,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=通过wifi刷写ELRS固件&url=https://shihantian.github.io/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/index.html&pic=https://shihantian.github.io/img/kakashi_avatar.jpg&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ELRS固件刷写&url=https://shihantian.github.io/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/index.html&pic=https://shihantian.github.io/img/kakashi_avatar.jpg&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 Share to Weibo
             </li>
@@ -474,7 +474,7 @@
 
     <!-- Share LinkedIn -->
     
-        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=https://shihantian.github.io/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/index.html&title=通过wifi刷写ELRS固件" target="_blank">
+        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=https://shihantian.github.io/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/index.html&title=ELRS固件刷写" target="_blank">
             <li class="mdl-menu__item">
                 Share to LinkedIn
             </li>
@@ -483,7 +483,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Hantian&#39;s blog&title=通过wifi刷写ELRS固件&summary=record share progress&pics=https://shihantian.github.io/img/kakashi_avatar.jpg&url=https://shihantian.github.io/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=Hantian&#39;s blog&title=ELRS固件刷写&summary=record share progress&pics=https://shihantian.github.io/img/kakashi_avatar.jpg&url=https://shihantian.github.io/2024/01/03/%5BFPV%5D%E9%80%9A%E8%BF%87wifi%E5%88%B7%E5%86%99elrs%E5%9B%BA%E4%BB%B6/index.html" target="_blank">
             <li class="mdl-menu__item">
                 Share to QQ
             </li>
@@ -502,21 +502,102 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h1><ol>
+        <p>ELRS的接收机和发射机都需要刷写好固件，并且固件大版本号匹配才能对频配对。本博客以ELRS 2.4G 接收机刷写为例，介绍一种成功率较高的刷写方式。即：</p>
+<ul>
+<li>官方仓库下载源码（简单且靠谱且新）</li>
+<li>使用ELRS配置器本地编译固件（软件下载容易本地编译稳定）</li>
+<li>通过wifi连接，使用网页端上传和烧录固件（不会因为端口问题出现各种bug）</li>
+</ul>
+<h1 id="下载固件源码"><a href="#下载固件源码" class="headerlink" title="下载固件源码"></a>下载固件源码</h1><ol>
 <li>进入<a target="_blank" rel="noopener" href="https://github.com/ExpressLRS/ExpressLRS">ExpressLRS仓库</a></li>
-<li>下载zip</li>
+<li>克隆仓库或直接下载zip，zip需解压备用</li>
 </ol>
-<pre><code class="c">#include &lt;stdio.h&gt;
-main()
-&#123;
-        int x,y,m;				/* 定义整型变量x，y，m */
-        printf(&quot;Please input x and y\n&quot;);	/* 输出提示信息 */
-        scanf(&quot;%d%d&quot;,&amp;x,&amp;y);			/* 读入两个乘数，赋给x，y变量 */
-        m=x*y;					/* 计算两个乘数的积，赋给变量m */
-        printf(&quot;%d * %d = %d\n&quot;,x,y,m);		/* 输出结果 */
-&#125;
-</code></pre>
-<h1 id="编译固件"><a href="#编译固件" class="headerlink" title="编译固件"></a>编译固件</h1><h1 id="上传并烧录固件"><a href="#上传并烧录固件" class="headerlink" title="上传并烧录固件"></a>上传并烧录固件</h1>
+<h1 id="编译固件"><a href="#编译固件" class="headerlink" title="编译固件"></a>编译固件</h1><h2 id="安装-ExpressLRS-configurator"><a href="#安装-ExpressLRS-configurator" class="headerlink" title="安装 ExpressLRS configurator"></a>安装 ExpressLRS configurator</h2><p><a target="_blank" rel="noopener" href="https://www.expresslrs.org/quick-start/installing-configurator/">官网安装教程</a></p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-22-30-06.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-22-30-06" width=70%" /> </p>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/ExpressLRS/ExpressLRS-Configurator/releases">官方Releases页面</a>，Assets中选择对应的安装文件</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-22-29-26.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-22-29-26" width=70%" /> </p>
+
+<p>安装完成并打开软件</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-22-31-52.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-22-31-52" width=70%" /> </p>
+
+<h2 id="编译固件-1"><a href="#编译固件-1" class="headerlink" title="编译固件"></a>编译固件</h2><p>我们需要通过刚安装的ELRS配置器将固件的源代码编译成可以烧录到硬件上的二进制文件(.bin)</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-22-36-33.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-22-36-33" width=70%" /> </p>
+
+<center>选择本地</center>
+
+<br>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-22-37-07.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-22-37-07" width=70%" /> </p>
+
+<center>本地路径需选择到源码的src路径</center>
+
+<br>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-22-39-21.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-22-39-21" width=70%" /> </p>
+
+<center>先选设备分类后选设备。若不清楚应咨询硬件购买店铺的客服</center>
+
+<br>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-22-41-32.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-22-41-32" width=70%" /> </p>
+
+<center>选择WIFI</center>
+
+<br>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-22-45-44.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-22-45-44" width=70%" /> </p>
+
+<p>设备选项基本可以默认。</p>
+<ul>
+<li>监管区域不要选欧洲的限制会多。</li>
+<li>对频短语设置建议勾选并自己设置（发射机需要设置相同的对频密码），这样就不需要使用插拔断电三次这种不优雅的方式进行对频了</li>
+<li>AUTO_WIFI_ON_INTERVAL的值可以自己调，这里填60就是插电后60秒内未对频将进入wifi模式</li>
+</ul>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-23-18-55.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-23-18-55" width=70%" /> </p>
+
+<center>点击编译，编译，编译，不要直接刷写</center>
+
+<br>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-23-20-38.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-23-20-38" width=70%" /> </p>
+
+<center>编译中，这一步时间较久，我这边用了2分钟</center>
+
+<br>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-23-23-50.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-23-23-50" width=70%" /> </p>
+
+<center>编译成功，弹出编译好的固件所在的文件夹，名称类似于箭头所指的是我们要的固件</center>
+
+<br>
+
+<h1 id="上传并烧录固件（通过wifi，通过网页端）"><a href="#上传并烧录固件（通过wifi，通过网页端）" class="headerlink" title="上传并烧录固件（通过wifi，通过网页端）"></a>上传并烧录固件（通过wifi，通过网页端）</h1><h2 id="wifi连接"><a href="#wifi连接" class="headerlink" title="wifi连接"></a>wifi连接</h2><p>通电无遥控器连接，AUTO_WIFI_ON_INTERVAL超时后，接收机自动WiFi upade模式（指示灯闪烁情况会变化）。</p>
+<p>连接 ExpressLRS RX 的 wifi, wifi密码为expresslrs</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-23-39-37.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-23-39-37" width=70%" /> </p>
+
+<p>自动弹出网页页面。</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-23-44-25.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-23-44-25" width=70%" /> </p>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-23-46-08.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-23-46-08" width=70%" /> </p>
+
+<center>这里选择文件选择刚才编译出的bin文件,点击Update</center>
+
+<br>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-23-47-07.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-23-47-07" width=70%" /> </p>
+
+<center> uploaded 100% 后不着急，还需要flash</center>
+
+<br>
+
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/[FPV]通过wifi刷写elrs固件-2024-01-08-23-48-17.png" alt="[FPV]通过wifi刷写elrs固件-2024-01-08-23-48-17" width=70%" /> </p>
+
+<p>显示烧录成功。官方说要等待到LED blinking, 我也不清楚这里的blinking是快闪还是慢闪。Anyway,等一小会看到led闪烁模式发生变化，就好了。</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/blog/ELRS 915 nano接收机固件升级-2023-12-22-01-45-25.png" alt="ELRS 915 nano接收机固件升级-2023-12-22-01-45-25" width=70%" /> </p>
+
+<p>OK, DONE</p>
+
         
     
 
