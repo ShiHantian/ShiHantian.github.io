@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/bollnh/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://.disqus.com"/>
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            古月居《ROS入门21讲》零基础学习笔记 | 
+        
+        Hantian&#39;s blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.svg">
+    <link rel="icon" href="/img/favicon.svg">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="record share progress">
+    <meta name="keywords" content=",ROS,机器人,操作系统,航模,自动驾驶">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Hantian&#39;s blog">
+    <meta name="msapplication-starturl" content="https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Hantian&#39;s blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.svg">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="古月居《ROS入门21讲》零基础学习笔记 | Hantian&#39;s blog">
+    <meta property="og:image" content="/img/favicon.svg">
+    <meta property="og:description" content="record share progress">
+    <meta property="og:article:tag" content="ROS"> <meta property="og:article:tag" content="机器人"> <meta property="og:article:tag" content="操作系统"> <meta property="og:article:tag" content="航模"> <meta property="og:article:tag" content="自动驾驶"> 
+
+    
+        <meta property="article:published_time" content="Tue Dec 20 2022 00:00:00 GMT+0800">
+        <meta property="article:modified_time" content="Sat Mar 23 2024 11:31:25 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html",
+    "headline": "古月居《ROS入门21讲》零基础学习笔记",
+    "datePublished": "Tue Dec 20 2022 00:00:00 GMT+0800",
+    "dateModified": "Sat Mar 23 2024 11:31:25 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "Shi Hantian",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Hantian&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.svg"
+        }
+    },
+    "keywords": ",ROS,机器人,操作系统,航模,自动驾驶",
+    "description": "record share progress",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-%E8%AF%BE%E7%A8%8B%E7%AE%80%E4%BB%8B"><span class="post-toc-number">2.</span> <span class="post-toc-text">1.课程简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-Linux%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85"><span class="post-toc-number">3.</span> <span class="post-toc-text">2.Linux系统介绍及安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-Linux%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%EF%BC%88%E6%93%8D%E4%BD%9C%E9%9B%86%EF%BC%89"><span class="post-toc-number">4.</span> <span class="post-toc-text">3.Linux基础操作（操作集）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%91%BD%E4%BB%A4%E7%BB%93%E6%9E%84"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">命令结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">常用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">快捷操作</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-cpp-python%E6%9E%81%E7%AE%80%E5%9F%BA%E7%A1%80%EF%BC%88%E6%93%8D%E4%BD%9C%E9%9B%86%EF%BC%89"><span class="post-toc-number">5.</span> <span class="post-toc-text">4.cpp&amp;python极简基础（操作集）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%AE%80%E5%8D%95%E5%AF%B9%E6%AF%94"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">简单对比</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91%E5%99%A8"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">安装编译器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BC%96%E8%AF%91%E5%92%8C%E8%BF%90%E8%A1%8C"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">编译和运行</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#5-%E5%AE%89%E8%A3%85ROS"><span class="post-toc-number">6.</span> <span class="post-toc-text">5.安装ROS</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#6-ROS%E6%98%AF%E4%BB%80%E4%B9%88"><span class="post-toc-number">7.</span> <span class="post-toc-text">6.ROS是什么</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#7-ROS%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="post-toc-number">8.</span> <span class="post-toc-text">7.ROS的核心概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%8A%82%E7%82%B9%E4%B8%8E%E8%8A%82%E7%82%B9%E7%AE%A1%E7%90%86%E5%99%A8"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">节点与节点管理器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%8A%82%E7%82%B9%EF%BC%88Node%EF%BC%89%E2%80%94-%E6%89%A7%E8%A1%8C%E5%8D%95%E5%85%83"><span class="post-toc-number">8.1.1.</span> <span class="post-toc-text">节点（Node）— 执行单元</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%8A%82%E7%82%B9%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%88ROS-Master-%E2%80%94-%E6%8E%A7%E5%88%B6%E4%B8%AD%E5%BF%83"><span class="post-toc-number">8.1.2.</span> <span class="post-toc-text">节点管理器（ROS Master) — 控制中心</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1%EF%BC%88%E5%BC%82%E6%AD%A5%EF%BC%89"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">话题通信（异步）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%AF%9D%E9%A2%98-topic"><span class="post-toc-number">8.2.1.</span> <span class="post-toc-text">话题 topic</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B6%88%E6%81%AF-message"><span class="post-toc-number">8.2.2.</span> <span class="post-toc-text">消息 message</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1%E9%80%9A%E4%BF%A1%EF%BC%88%E5%90%8C%E6%AD%A5%EF%BC%89"><span class="post-toc-number">8.3.</span> <span class="post-toc-text">服务通信（同步）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9C%8D%E5%8A%A1-service"><span class="post-toc-number">8.3.1.</span> <span class="post-toc-text">服务 service</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%82%E6%95%B0-parameter"><span class="post-toc-number">8.4.</span> <span class="post-toc-text">参数 parameter</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="post-toc-number">8.5.</span> <span class="post-toc-text">文件系统</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#8-ROS%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E6%93%8D%E4%BD%9C%E9%9B%86%EF%BC%89"><span class="post-toc-number">9.</span> <span class="post-toc-text">8.ROS命令行工具的使用（操作集）</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#9-%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E4%B8%8E%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="post-toc-number">10.</span> <span class="post-toc-text">9.创建工作空间与功能包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="post-toc-number">10.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="post-toc-number">10.2.</span> <span class="post-toc-text">创建工作空间</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="post-toc-number">10.3.</span> <span class="post-toc-text">创建功能包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4-1"><span class="post-toc-number">10.4.</span> <span class="post-toc-text">创建工作空间</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E5%8A%9F%E8%83%BD%E5%8C%85-1"><span class="post-toc-number">10.5.</span> <span class="post-toc-text">创建功能包</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#10-Publisher%E7%9A%84%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0"><span class="post-toc-number">11.</span> <span class="post-toc-text">10. Publisher的编程实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#11-Subscriber%E7%9A%84%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0"><span class="post-toc-number">12.</span> <span class="post-toc-text">11. Subscriber的编程实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#12-%E8%AF%9D%E9%A2%98%E6%B6%88%E6%81%AF%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="post-toc-number">13.</span> <span class="post-toc-text">12. 话题消息的定义与使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#13-client%E7%9A%84%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0"><span class="post-toc-number">14.</span> <span class="post-toc-text">13. client的编程实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#14-server%E7%9A%84%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0"><span class="post-toc-number">15.</span> <span class="post-toc-text">14. server的编程实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#15-%E6%9C%8D%E5%8A%A1%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="post-toc-number">16.</span> <span class="post-toc-text">15. 服务数据的定义与使用</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#16-%E5%8F%82%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%BC%96%E7%A8%8B%E6%96%B9%E6%B3%95"><span class="post-toc-number">17.</span> <span class="post-toc-text">16. 参数的使用与编程方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#17-ROS%E4%B8%AD%E7%9A%84%E5%9D%90%E6%A0%87%E7%B3%BB%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="post-toc-number">18.</span> <span class="post-toc-text">17. ROS中的坐标系管理系统</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#18-tf%E5%9D%90%E6%A0%87%E7%B3%BB%E5%B9%BF%E6%92%AD%E4%B8%8E%E7%9B%91%E5%90%AC%E7%9A%84%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0"><span class="post-toc-number">19.</span> <span class="post-toc-text">18. tf坐标系广播与监听的编程实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#19-launch-%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="post-toc-number">20.</span> <span class="post-toc-text">19. launch 启动文件的使用方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#20-%E5%B8%B8%E7%94%A8%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="post-toc-number">21.</span> <span class="post-toc-text">20. 常用可视化工具的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Qt%E5%B7%A5%E5%85%B7%E7%AE%B1"><span class="post-toc-number">21.1.</span> <span class="post-toc-text">Qt工具箱</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Rviz"><span class="post-toc-number">21.2.</span> <span class="post-toc-text">Rviz</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gazebo"><span class="post-toc-number">21.3.</span> <span class="post-toc-text">Gazebo</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E4%B8%80%E4%BA%9B%E7%90%90%E7%A2%8E%E4%BF%A1%E6%81%AF%E7%9A%84%E6%95%B4%E7%90%86"><span class="post-toc-number">22.</span> <span class="post-toc-text">一些琐碎信息的整理</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                古月居《ROS入门21讲》零基础学习笔记
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Shi Hantian</strong>
+        <span>Dec 20, 2022</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-none-link" href="/tags/ROS/" rel="tag">ROS</a></li><li class="mdl-menu__item"><a class="post_tag-none-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="mdl-menu__item"><a class="post_tag-none-link" href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="tag">机器人</a></li><li class="mdl-menu__item"><a class="post_tag-none-link" href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" rel="tag">自动驾驶</a></li><li class="mdl-menu__item"><a class="post_tag-none-link" href="/tags/%E8%88%AA%E6%A8%A1/" rel="tag">航模</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=古月居《ROS入门21讲》零基础学习笔记&url=https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html&pic=https://shihantian.github.io/img/favicon.svg&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=古月居《ROS入门21讲》零基础学习笔记&url=https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html&via=Shi Hantian" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>”怕什么真理无穷，进一寸有一寸的欢喜。”</p>
+<p align="right">——古月 适
+</blockquote>
+<p>本人大一小白一枚，暂无编程基础，参加了一个本科生科研项目，目前正在学习一些ROS1相关的一些前置基础知识。<br>在这里以博客的形式记录一下学习的过程、操作的细节及操作的结果、爬坑方法、听课笔记。<br>希望能给同样在学习相关知识的小伙伴一些问题解决的参考以及学习之路的陪伴。<br>我是基本按照导师推荐的B站上古月居的《ROS入门21讲》(ROS1)走的<br>本博客也是按照课程学习顺序做的笔记</p>
+<h1 id="1-课程简介"><a href="#1-课程简介" class="headerlink" title="1.课程简介"></a>1.课程简介</h1><p>老师的课程使用的是Ubuntu18.04,ROS melodic<br>我用的是Ubuntu20.04,ROS noetic<br>由于都是ROS1,所以原理和操作相同</p>
+<h1 id="2-Linux系统介绍及安装"><a href="#2-Linux系统介绍及安装" class="headerlink" title="2.Linux系统介绍及安装"></a>2.Linux系统介绍及安装</h1><p>先下载VMware，普通版本就行，专业版需找激活码（可tb）<br>然后建议上某宝安装想要的ubuntu和ros版本<br>（推荐 大熊一加一）<br>此处含泪删除上千字搞机记录</p>
+<h1 id="3-Linux基础操作（操作集）"><a href="#3-Linux基础操作（操作集）" class="headerlink" title="3.Linux基础操作（操作集）"></a>3.Linux基础操作（操作集）</h1><h2 id="命令结构"><a href="#命令结构" class="headerlink" title="命令结构"></a>命令结构</h2><p>命令 选项 参数<br>command option parameter<br>之间都要加空格</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li><p>pwd查看终端所在路径(Print Working Directory）<br> <img src="https://img-blog.csdnimg.cn/459d164a9ab646d983cfb2249b90f0ce.png" alt="pwd"></p>
+</li>
+<li><p>cd切换路径（注意斜杠前面有空格）(change directory)<br> <img src="https://img-blog.csdnimg.cn/8a285d47c8364106ae752a1ce057afa4.png" alt="cd切换路径"></p>
+</li>
+<li><p>cd .  .跳回到上级目录（cd和dot之间也要有空格）<img src="https://img-blog.csdnimg.cn/2e986dacf5c4498ab36ee6198b540215.png" alt="cd .."></p>
+</li>
+<li><p>mkdir 在当前路径创建目录（make directory)<br> <img src="https://img-blog.csdnimg.cn/ada406136d9f481197736d736bf7a1af.png" alt="mkdir"></p>
+</li>
+<li><p>ls 列出当前路径下面的所有文件夹<br> <img src="https://img-blog.csdnimg.cn/3e5f9b6c227440d9b26a6980f48970a9.png" alt="ls"></p>
+</li>
+<li><p>touch 创建新的文件（该文件相当于text记事本）<br><img src="https://img-blog.csdnimg.cn/23bc9b1148724bebba956f96c65b5c27.png" alt="touch"></p>
+</li>
+<li><p>mv 移动文件 (move)<br>（在该文件所在目录的路径下执行此操作）<br><img src="https://img-blog.csdnimg.cn/c74792ef9c4748ffbf4121858231e34a.png" alt="mv"></p>
+</li>
+<li><p>cp 复制粘贴文件 (copy)<br>（在该文件所在目录的路径下执行此操作）<br>（cp 文件名 目标目录&#x2F;重命名的新名称）<br><img src="https://img-blog.csdnimg.cn/0369c095e00e4ee1afa3c1f99deceae7.png" alt="cp"></p>
+</li>
+<li><p>rm 删除某个文件（remove）<br><img src="https://img-blog.csdnimg.cn/179fe0f7226141aca2307982bd5b4f79.png" alt="在这里插入图片描述"></p>
+</li>
+<li><p>rm -r 删除一个文件夹（recursive递归）<br>(要删除的文件夹后面加不加斜杠效果好像一样，不知道斜杠的使用逻辑）<br><img src="https://img-blog.csdnimg.cn/9bd1efdaa0154de1b6ed522dc222d41c.png" alt="rm -r"></p>
+</li>
+<li><p>sudo 提升用户权限(super user do超级用户！）<br>（这里以获取软件更新权限为例）<br><img src="https://img-blog.csdnimg.cn/445c2d23ec97493ea929c206104371c3.png" alt="sudo"></p>
+</li>
+<li><p>“- - help “查看帮助<br><img src="https://img-blog.csdnimg.cn/7611d8a8c36a4d609bbcef8a069250ad.png" alt="help"></p>
+</li>
+</ul>
+<h3 id="快捷操作"><a href="#快捷操作" class="headerlink" title="快捷操作"></a>快捷操作</h3><ul>
+<li>Tab快速补全。<br>长长的文件名可以用Tab补全<br>若文件名首字母有歧义，按两次，出选项</li>
+<li>用方向上下键调出之前的命令<br>不想找的时候按Ctrl+C，自己输命令</li>
+<li>文件名前面加dot是隐藏文件</li>
+</ul>
+<h1 id="4-cpp-python极简基础（操作集）"><a href="#4-cpp-python极简基础（操作集）" class="headerlink" title="4.cpp&amp;python极简基础（操作集）"></a>4.cpp&amp;python极简基础（操作集）</h1><h2 id="简单对比"><a href="#简单对比" class="headerlink" title="简单对比"></a>简单对比</h2><ul>
+<li>cpp适合底层硬件开发、框架开发</li>
+<li>python适合应用层、算法的开发</li>
+<li>不同场景选择不同语言</li>
+</ul>
+<h2 id="安装编译器"><a href="#安装编译器" class="headerlink" title="安装编译器"></a>安装编译器</h2><ul>
+<li>安装g++编译器<br><img src="https://img-blog.csdnimg.cn/25b9b7ce6fb844e9a699c47c3de9d81b.png" alt="在这里插入图片描述"></li>
+<li>安装python编译器（点击方向上键重复前一步操作，g++改成python就行了）<br>出了点问题<br><img src="https://img-blog.csdnimg.cn/fa92a7cb3650480087cd327e6acbaedc.png" alt="报错"><br>在CSDN上找到解决方法，解决方式如下<br><img src="https://img-blog.csdnimg.cn/099606925e4f4f15aec161b49fa4354a.png" alt="在这里插入图片描述"><br>编译器安装完成<br>老师简单讲了一下语言逻辑。并将使用一些源码做演示教学。我在他的微信公众号上进入了github文件地址并下载了源码。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/32a2086a63284658b51ec315b03b4a9a.png" alt="download zip"><br>但是没能够像老师一样简单地复制粘贴到虚拟机。<br>最后呢，关掉虚拟机改了一个虚拟机设置，把硬件CD&#x2F;DCD里面，使用ISO文件改成了使用物理驱动器自动检测。（不知道这一步有没有作用）<br>后面还是拖不动下载的文件夹。但是大文件夹里面的linux文件夹可以拖进虚拟机。我试了一下另一个下面有子目录的文件夹，也是可以拖进去的。或许是因为大文件夹太大了？我不知道。拖到桌面，出现奇怪东东，不明白。（后来重启虚拟机之后消失了）<br><img src="https://img-blog.csdnimg.cn/298028b7aa68464cad3fc7cb8cc97111.png" alt="鬼影文件夹"><br>啊这，我成功吧教学文件夹拖进虚拟机了。方法是什么呢？。。。把文件夹名字改短。。。<br><img src="https://img-blog.csdnimg.cn/8c01cedc0ac84fcbad6d335cf65dfb30.png" alt="改文件名"><br>我又把里面的文件夹拖到桌面，再把原空白目录删除。这一波下来和老师的直接拖动效果一样了，不失为一种办法。<br><img src="https://img-blog.csdnimg.cn/342b30fb9de441f0ab612308af28d1cb.png" alt="拖到桌面"></p>
+<h2 id="编译和运行"><a href="#编译和运行" class="headerlink" title="编译和运行"></a>编译和运行</h2><p>下面开始编译和运行cpp for 循环的文件。</p>
+<ul>
+<li>g++ 文件名 -o 输出的可执行的文件的名字</li>
+</ul>
+<pre><code class="bash"> g++ c++_for.cpp -o c++_for
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/41bbc3e982894cf7b57912dc8ca9922d.png" alt="编译"></p>
+<ul>
+<li>.&#x2F; 运行文件</li>
+</ul>
+<pre><code class="bash">./c++_for
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/9d85f90744c44bafb1b100c010193790.png" alt="cpp for 运行"><br>python不用编译，直接用<br>结果寄，SyntaxError: Missing parentheses in call to ‘print‘<br>记得我之前安装python编译器的时候有过改动，大概偏差出在那里。<br>于是我进python文件修改了一下语法（print改为print（）），与胡老师课件上有一点点不同，运行成功。<br><img src="https://img-blog.csdnimg.cn/570a81d5c18447be803c4000b6c9cb63.png" alt="python修改语法运行成功"><br>再运行cpp while程序，连按多次方向上键，调出前前条命令。<br><img src="https://img-blog.csdnimg.cn/d71c52a90b9d40fe928587268b3d3cdf.png" alt="while运行"><br>做了一件小事，在虚拟机上安装了IDE。关于我决定在虚拟机上学编程这件事，原因一是新鲜感多一些，二是有一位计算机大佬朋友就是这么做的。据说有一些指令会很方便。在虚拟机上安装IDE的时候，我在clion和VScode两者之间还纠结了一阵，最终选择了后者。一方面是之前使用了一段时间clion体验不佳，让我满意的只是图表和页面比较好看；另一方面是听说VS的功能比较强大，甚至可以和人工智能ChatGPT交流，爱了爱了。安装的过程和结果也很干净，期待接下来的学习。</p>
+<h1 id="5-安装ROS"><a href="#5-安装ROS" class="headerlink" title="5.安装ROS"></a>5.安装ROS</h1><p>省流：上某宝</p>
+<h1 id="6-ROS是什么"><a href="#6-ROS是什么" class="headerlink" title="6.ROS是什么"></a>6.ROS是什么</h1><ul>
+<li>通信机制+开发工具+应用功能+生态系统</li>
+</ul>
+<p>提高机器人研发中的软件复用率<br>学习过程中建议用谷歌搜索，搜到wiki的网站<br>（ROSwiki是记录ROS信息文档的主要论坛）</p>
+<h1 id="7-ROS的核心概念"><a href="#7-ROS的核心概念" class="headerlink" title="7.ROS的核心概念"></a>7.ROS的核心概念</h1><h2 id="节点与节点管理器"><a href="#节点与节点管理器" class="headerlink" title="节点与节点管理器"></a>节点与节点管理器</h2><h3 id="节点（Node）—-执行单元"><a href="#节点（Node）—-执行单元" class="headerlink" title="节点（Node）— 执行单元"></a>节点（Node）— 执行单元</h3><ul>
+<li>节点是具体的执行单元，执行具体任务的进程，独立运行的可执行文件</li>
+<li>不同的节点可以使用不同的编程语言，可分布式运行在不同的主机</li>
+<li>节点在系统中的名称必须是唯一的，重名ros系统会找不到</li>
+</ul>
+<h3 id="节点管理器（ROS-Master-—-控制中心"><a href="#节点管理器（ROS-Master-—-控制中心" class="headerlink" title="节点管理器（ROS Master) — 控制中心"></a>节点管理器（ROS Master) — 控制中心</h3><ul>
+<li>节点的管理。命名、注册、建立通讯</li>
+<li>提供参数服务器，节点使用此服务器存储和检索运行时的参数</li>
+</ul>
+<h2 id="话题通信（异步）"><a href="#话题通信（异步）" class="headerlink" title="话题通信（异步）"></a>话题通信（异步）</h2><h3 id="话题-topic"><a href="#话题-topic" class="headerlink" title="话题 topic"></a>话题 topic</h3><ul>
+<li>分为发布者和订阅者</li>
+<li>单向数据传输，从驱动端传到订阅段，发布者到订阅者</li>
+<li>通道被定义为话题，时数据传输的总线</li>
+</ul>
+<h3 id="消息-message"><a href="#消息-message" class="headerlink" title="消息 message"></a>消息 message</h3><ul>
+<li>具有一定的类型和数据结构（有ros提供的标准类型和用户自定义的类型</li>
+<li>使用与编程语言无关的 <strong>.msg</strong> 文件定义类型和数据结构</li>
+</ul>
+<h2 id="服务通信（同步）"><a href="#服务通信（同步）" class="headerlink" title="服务通信（同步）"></a>服务通信（同步）</h2><h3 id="服务-service"><a href="#服务-service" class="headerlink" title="服务 service"></a>服务 service</h3><ul>
+<li>使用客户端&#x2F;服务器（service&#x2F;client) 模型，客户端发送请求数据，服务器完成处理后返回应答数据</li>
+<li>使用与编程语言无关的, <strong>.srv</strong> 文件定义请求和应答的数据结构</li>
+<li>一般是一次，发出一个配置指令，完成配置内容，返回一个反馈<br><img src="https://img-blog.csdnimg.cn/d9faef3c769140b3aa4436659528a935.png" alt="在这里插入图片描述"><br>缓冲区是防止发布与订阅的速度不匹配<br>服务是会有阻塞</li>
+</ul>
+<h2 id="参数-parameter"><a href="#参数-parameter" class="headerlink" title="参数 parameter"></a>参数 parameter</h2><ul>
+<li>适合存储静态、非二进制的配置参数，不适合动态配置的数据</li>
+</ul>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><ul>
+<li>功能包 package：ros软件的基本单元，包含源码、配置文件、数据定义</li>
+<li>功能包清单 package manifest：记录功能包的基本信息，包含作者信息、许可信息等等信息</li>
+<li>元功能包 meta packages：组织多个用于同一目的的功能包</li>
+</ul>
+<h1 id="8-ROS命令行工具的使用（操作集）"><a href="#8-ROS命令行工具的使用（操作集）" class="headerlink" title="8.ROS命令行工具的使用（操作集）"></a>8.ROS命令行工具的使用（操作集）</h1><p>（开始实操）<br>键盘突然在虚拟机用不了了。<a target="_blank" rel="noopener" href="https://blog.csdn.net/wokenshin/article/details/50324785?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-2-50324785-blog-79088432.pc_relevant_vip_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-2-50324785-blog-79088432.pc_relevant_vip_default&utm_relevant_index=3">有效解决方案</a></p>
+<p><strong>rosrun</strong></p>
+<ul>
+<li>roscore启动ROS master(要首先运行的一个指令）<br><img src="https://img-blog.csdnimg.cn/887efc460e984388934d0c14d73ad626.png" alt="在这里插入图片描述"></li>
+<li>rosrun来运行一个节点</li>
+<li>（要呼出一个新终端）</li>
+<li>（加两个参数，功能包名  节点名）</li>
+<li>（输入功能包名后按tab可以显示功能包下有的节点）<br><img src="https://img-blog.csdnimg.cn/49cd32e3d41c41f2824998cdae8fa9fe.png" alt="在这里插入图片描述"><br>光标要再键盘控制节点的那个窗口才能控制<br><img src="https://img-blog.csdnimg.cn/23109a4aec1040629c898deba1a3c7ed.png" alt="在这里插入图片描述"></li>
+</ul>
+<p><strong>rqt_graph</strong></p>
+<ul>
+<li>rqt_graph用来显示系统计算图的工具</li>
+<li>（直观，可视化，了解系统全貌）</li>
+<li>（显示了节点和话题的信息）<br><img src="https://img-blog.csdnimg.cn/9f4386db483f4231a1f0a6750464b5e8.png" alt="在这里插入图片描述"></li>
+</ul>
+<p><strong>rosnode</strong></p>
+<ul>
+<li>rosnode list</li>
+<li>（列出系统当中使用的节点）</li>
+<li>（rosout是ros默认的一个话题)<br><img src="https://img-blog.csdnimg.cn/b385bad2cee24df79cc47111d58e8739.png" alt="在这里插入图片描述"></li>
+<li>rosnode info</li>
+<li>(查看某个节点的信息）</li>
+<li>(发布和订阅的信息）</li>
+</ul>
+<pre><code class="bash">rosnode info /turtlesim
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/efa830d1ba314967af10b655b6f5707d.png" alt="在这里插入图片描述"></p>
+<p><strong>rostopic</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/c7fa90a6232442dbbd1654d5a1987a25.png" alt="在这里插入图片描述"><br>看到下面的cmd_vel就是刚才就是键盘控制节点和海龟仿真器节点通讯的话题<br><img src="https://img-blog.csdnimg.cn/42df58b0e22d46f99f8ef114989603e9.png" alt="在这里插入图片描述"><br>学会使用tab, 这里输入消息类型的时候还要连按两次tab</p>
+<ul>
+<li>用pub发布数据给某一个topic</li>
+<li>后面跟话题名</li>
+<li>再后面跟消息结构（类型）</li>
+<li>再跟消息结构里的具体数据</li>
+</ul>
+<pre><code class="bash">rostopic pub /turtle1/cmd_vel geometry_msgs/Twist &quot;linear:
+  x: 1.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0&quot; 
+</code></pre>
+<p>注意这里线速度的单位是米每秒，角速度单位弧度每秒）<br>在调具体数据的时候，移动光标只可以用左右方向键（用上下是会调出历史命令）<br><img src="https://img-blog.csdnimg.cn/6e0cfde4b8284475ab943b7ba3a27b26.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/5f3968bd9cf441bd9af656ce0f06d482.png" alt="在这里插入图片描述"><br>看到小海龟向左前方45度移动了一小段<br>想让小海龟连续移动</p>
+<ul>
+<li>-r 表示rate, 10表示10Hz</li>
+</ul>
+<pre><code class="bash">rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist &quot;linear:
+&gt;   x: 1.0
+&gt;   y: 1.0
+&gt;   z: 0.0
+&gt; angular:
+&gt;   x: 0.0
+&gt;   y: 0.0
+&gt;   z: 0.0&quot; 
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/167f122fee4d43cba4148569343efa65.png" alt="在这里插入图片描述"><br>调angular的z调旋转<br>看到方向和角速度都是可以调的<br>圆圈的半径也符合速度和角速度的计算<br><img src="https://img-blog.csdnimg.cn/a257d91942cf4e01a287cac77a03787e.png" alt="在这里插入图片描述"><br>在前面加负号也有意义<br><img src="https://img-blog.csdnimg.cn/a7147e04c322406ca0244bdfffb75514.png" alt="在这里插入图片描述"></p>
+<p><strong>rosmsg</strong></p>
+<ul>
+<li>rosmsg show显示消息的数据结构<br><img src="https://img-blog.csdnimg.cn/ba67bdb5765041d1bd28fc59223a05f7.png" alt="在这里插入图片描述"><br>这里吐槽一下，好像不方便改设备的名称<br>改了之后节点之间的通讯会出现问题<br>只好继续用ros-virtual-machine了。。</li>
+</ul>
+<p><strong>rosservice</strong></p>
+<ul>
+<li>rosservice list</li>
+<li>(提供的所有服务）</li>
+<li>(服务端都是仿真器）（客户端是终端）<br><img src="https://img-blog.csdnimg.cn/13201d78a58e4518b5b9491235c5b580.png" alt="在这里插入图片描述"></li>
+<li>rosservice call 召唤新海龟</li>
+</ul>
+<pre><code class="bash">rosservice call /spawn &quot;x: 2.0
+y: 2.0
+theta: 0.0
+name: &#39;turtle2&#39;&quot; 
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/a7895eb92e9f4cba9d06e85e50d4dcaa.png" alt="在这里插入图片描述"><br>可以看到是有一个反馈的（反馈信息name: “turtle2”）<br><img src="https://img-blog.csdnimg.cn/37a4267e7f774049bc29f5f0d24e8abb.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>话题记录</li>
+<li><code>rosbag record -a -O cmd_record</code></li>
+<li>（rosbag 记录 all -大写O保存成压缩包 压缩包的名字）</li>
+</ul>
+<p>看到了订阅的话题<br>随便让海龟动几下<br>结束之后在终端ctrl+c<br>默认保存到了主文件夹<br>从回车之后就开始记录了，包括没有操作的等待时间<br><img src="https://img-blog.csdnimg.cn/1b25a4c8f9c5494c8134265c1eb9bfd9.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>话题复现</li>
+<li><code>rosbag play cmd_record.bag </code><br><img src="https://img-blog.csdnimg.cn/9e777f8e565b44a0b4104605ad30df15.png" alt="在这里插入图片描述"></li>
+</ul>
+<h1 id="9-创建工作空间与功能包"><a href="#9-创建工作空间与功能包" class="headerlink" title="9.创建工作空间与功能包"></a>9.创建工作空间与功能包</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li><strong>工作空间</strong>（workspace)是一个存放工程开发相关文件的文件夹。所有的源码、配置文件、可执行文件都是放置在里面的。主要分为四个文件夹：</li>
+<li>1.src: 代码空间 (source space)<br>放置功能包（里面的代码、配置文件、launch文件</li>
+<li>2.build:编译空间 (build space)<br>编译过程中的中间文件（不太用关心</li>
+<li>3.devel:开发空间 (development space)<br>编译生成的一些可执行文件、库、脚本</li>
+<li>4.install:安装空间 (install space）<br>install命令的结果就放在里面</li>
+</ul>
+<p>放一张老师课件截图：<br><img src="https://img-blog.csdnimg.cn/7cdb82f6f394445cad7825852a3e2749.png" alt="在这里插入图片描述"></p>
+<h2 id="创建工作空间"><a href="#创建工作空间" class="headerlink" title="创建工作空间"></a>创建工作空间</h2><p>overview:<br><img src="https://img-blog.csdnimg.cn/9d2bda55a96c430eb93111f89b86b4e5.png" alt="在这里插入图片描述"><br>operation:<br><img src="https://img-blog.csdnimg.cn/7f754d37406b44108ffddfc7c69840e7.png" alt="在这里插入图片描述"></p>
+<pre><code class="bash">catkin_init_workspace //初始化工作空间（属性变化），看到冒出了CMakeLists.txt
+</code></pre>
+<ul>
+<li>下面对工程编译（<code>catkin_make </code></li>
+<li>要来到<strong>工作空间的根目录</strong>进行编译<br><img src="https://img-blog.csdnimg.cn/9da313f11df344ae91ec917734450d86.png" alt="在这里插入图片描述"><br>看到出现了另两个空间：<br><img src="https://img-blog.csdnimg.cn/82f9b79e7d5d4541a6b4d1887dc148de.png" alt="在这里插入图片描述"><br>使install空间出现：<br><img src="https://img-blog.csdnimg.cn/a7b3c106fee248578c135b86159c1fa6.png" alt="在这里插入图片描述"></li>
+</ul>
+<h2 id="创建功能包"><a href="#创建功能包" class="headerlink" title="创建功能包"></a>创建功能包</h2><ul>
+<li>功能包是放置ROS源码的最小单元</li>
+<li>同一个工作空间下不允许存在同名功能包</li>
+</ul>
+<p><strong>创建功能包：</strong><br>（要放在src里面）：<br><img src="https://img-blog.csdnimg.cn/23227ad21b774a298d8e3eb2431345a4.png" alt="在这里插入图片描述"></p>
+<p>命令 功能包名 依赖1 依赖2 依赖3：</p>
+<pre><code class="bash">catkin_create_pkg  test_pkg roscpp rospy std_msgs
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/697588b819c94cfe91202791b11ea4a8.png" alt="在这里插入图片描述"><br>打开功能包：<br>include放置头文件<br>src放代码<br>后面两个文件是功能包一定有的，使其区别于普通文件夹的属性<br><img src="https://img-blog.csdnimg.cn/371078a4ed824b9bbc70065f97a329bb.png" alt="在这里插入图片描述"><br><strong>编译功能包</strong><br>还是先回到catkin_ws<br>编译工作空间就行了<br>因为没有代码所以也没有实际效果<br><img src="https://img-blog.csdnimg.cn/5676d55a5ac64d0fa7dcf25dcc5b0768.png" alt="在这里插入图片描述"><br>要运行功能包里某一个程序的话，要先设置一下工作空间的环境变量<br>设置之后系统才能找到工作空间</p>
+<p><strong>设置环境变量</strong>：</p>
+<pre><code class="bash">ros@ros-virtual-machine:~/catkin_ws$ source devel/setup.bash 
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/721b0ffff4324e58b4f44a8700561cf0.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/e5ec3d30df3948d0ae1bb7cc59c70318.png" alt="在这里插入图片描述"><br><strong>检查环境变量</strong></p>
+<ul>
+<li>用echo命令把环境变量打开</li>
+<li>（ROS_PACKAGE_PATH 是ROS本身的一个环境变量，通过这个环境变量查找所有功能包的路径）</li>
+<li>也是只有在前一步设置了工作空间的setup.bash之后，path里面才会包含工作空间的路径</li>
+</ul>
+<pre><code class="bash">ros@ros-virtual-machine:~/catkin_ws$ echo $ROS_PACKAGE_PATH 
+/home/ros/catkin_ws/src:/opt/ros/noetic/share
+</code></pre>
+<p>有点不懂了，贴一下chatGPT的解释<br><img src="https://img-blog.csdnimg.cn/271a22d6566e4b2a930ecba5292a91d2.png" alt="在这里插入图片描述"><br>小结：</p>
+<h2 id="创建工作空间-1"><a href="#创建工作空间-1" class="headerlink" title="创建工作空间"></a>创建工作空间</h2><ul>
+<li>创建：新建工作空间文件夹，该文件夹下新建代码空间</li>
+<li>cd到代码空间里去</li>
+<li>用命令初始化工作空间</li>
+<li>cd到工作空间里去</li>
+<li>用命令编译工作空间</li>
+<li>source设置环境变量</li>
+<li>检查环境变量</li>
+</ul>
+<h2 id="创建功能包-1"><a href="#创建功能包-1" class="headerlink" title="创建功能包"></a>创建功能包</h2><ul>
+<li>cd进入工作空间下的代码空间</li>
+<li>创建功能包，并配置依赖</li>
+<li>cd到工作空间</li>
+<li>编译工作空间</li>
+<li>source设置环境变量</li>
+</ul>
+<h1 id="10-Publisher的编程实现"><a href="#10-Publisher的编程实现" class="headerlink" title="10. Publisher的编程实现"></a>10. Publisher的编程实现</h1><ul>
+<li>cd进入工作空间下的代码空间, 创建功能包，并配置依赖</li>
+<li>在功能包里面的代码空间里编写C++代码文件</li>
+<li>在cmakelist文件里面配置编译规则</li>
+<li>cd到工作空间，编译工作空间，source设置环境变量</li>
+<li>打开roscore, 运行海龟仿真节点，运行功能包里发布者的节点</li>
+</ul>
+<h1 id="11-Subscriber的编程实现"><a href="#11-Subscriber的编程实现" class="headerlink" title="11. Subscriber的编程实现"></a>11. Subscriber的编程实现</h1><ul>
+<li>编写C++代码文件，配置编译规则</li>
+<li>cd到工作空间，编译，设置环境变量</li>
+<li>打开roscore, 运行海龟节点，运行功能包里面订阅者的节点</li>
+</ul>
+<h1 id="12-话题消息的定义与使用"><a href="#12-话题消息的定义与使用" class="headerlink" title="12. 话题消息的定义与使用"></a>12. 话题消息的定义与使用</h1><ul>
+<li>定义msg文件</li>
+<li>在package.xml里面添加功能包依赖</li>
+<li>在cmakelist.txt里面添加编译选项</li>
+<li>编译生成语言相关文件</li>
+<li>编写发布者</li>
+<li>编写订阅者</li>
+<li>在cmake文件里面配置编译规则:</li>
+</ul>
+<p>1. 设置要编译的代码和生成的可执行文件</p>
+<p>2. 设置链接库</p>
+<p>3. 添加依赖项</p>
+<ul>
+<li>cd到工作空间，编译，配置环境变量</li>
+<li>打开roscore, 运行发布者节点和订阅者节点</li>
+</ul>
+<h1 id="13-client的编程实现"><a href="#13-client的编程实现" class="headerlink" title="13. client的编程实现"></a>13. client的编程实现</h1><ul>
+<li><p>cd到代码空间，创建功能包</p>
+</li>
+<li><p>编写C++代码, 配置编译规则</p>
+</li>
+<li><p>cd到工作空间，编译，配置环境变量</p>
+</li>
+<li><p>打开roscore, 运行海龟仿真节点，运行客户端节点</p>
+</li>
+</ul>
+<h1 id="14-server的编程实现"><a href="#14-server的编程实现" class="headerlink" title="14. server的编程实现"></a>14. server的编程实现</h1><ul>
+<li><p>编写C++代码, 配置编译规则</p>
+</li>
+<li><p>cd到工作空间，编译，配置环境变量</p>
+</li>
+<li><p>打开roscore, 运行海龟仿真节点，运行服务端节点</p>
+</li>
+<li><p>$ rosservice call &#x2F;turtle_command”{}” 发布消息</p>
+</li>
+</ul>
+<h1 id="15-服务数据的定义与使用"><a href="#15-服务数据的定义与使用" class="headerlink" title="15. 服务数据的定义与使用"></a>15. 服务数据的定义与使用</h1><ul>
+<li>定义msg文件，添加功能包依赖，添加编译选项，编译生成相关文件</li>
+<li>编写发布者, 编写订阅者</li>
+<li>在cmake文件里面配置编译规则:</li>
+</ul>
+<p>1. 设置要编译的代码和生成的可执行文件 2. 设置链接库 3. 添加依赖项</p>
+<ul>
+<li>cd到工作空间，编译，配置环境变量</li>
+<li>打开roscore, 运行服务端，运行客户端节点</li>
+</ul>
+<h1 id="16-参数的使用与编程方法"><a href="#16-参数的使用与编程方法" class="headerlink" title="16. 参数的使用与编程方法"></a>16. 参数的使用与编程方法</h1><ul>
+<li>cd到代码空间，创建功能包</li>
+<li>编写C++代码, 配置编译规则</li>
+<li>cd到工作空间，编译，配置环境变量</li>
+<li>打开roscore, 运行海龟仿真节点，运行参数设置节点</li>
+</ul>
+<h1 id="17-ROS中的坐标系管理系统"><a href="#17-ROS中的坐标系管理系统" class="headerlink" title="17. ROS中的坐标系管理系统"></a>17. ROS中的坐标系管理系统</h1><ul>
+<li>$ sudo apt-getinstall ros-melodic-turtle-tf</li>
+<li>$ roslaunch turtle_tf turtletf demo.launch</li>
+<li>$ rosrun turtlesim turtle_teleop_key</li>
+<li>$ rosrun tf view_frames</li>
+</ul>
+<h1 id="18-tf坐标系广播与监听的编程实现"><a href="#18-tf坐标系广播与监听的编程实现" class="headerlink" title="18. tf坐标系广播与监听的编程实现"></a>18. tf坐标系广播与监听的编程实现</h1><ul>
+<li>cd到代码空间，创建功能包</li>
+<li>编写广播器和监听器的C++代码，配置编译规则</li>
+<li>cd到工作空间，编译，配置环境变量</li>
+<li>打开roscore</li>
+<li>运行海龟仿真节点</li>
+<li>运行turtle1和turtle2的广播器节点</li>
+<li>运行监听器节点</li>
+<li>运行键盘控制节点</li>
+</ul>
+<h1 id="19-launch-启动文件的使用方法"><a href="#19-launch-启动文件的使用方法" class="headerlink" title="19. launch 启动文件的使用方法"></a>19. launch 启动文件的使用方法</h1><ul>
+<li>launch文件：通过xml文件实现多节点的配置和启动（可自动启动ros master)</li>
+<li>在launch里面编写启动节点的语法和参数设置的语法</li>
+</ul>
+<h1 id="20-常用可视化工具的使用"><a href="#20-常用可视化工具的使用" class="headerlink" title="20. 常用可视化工具的使用"></a>20. 常用可视化工具的使用</h1><h2 id="Qt工具箱"><a href="#Qt工具箱" class="headerlink" title="Qt工具箱"></a>Qt工具箱</h2><ul>
+<li>提供了一系列可视化工具</li>
+</ul>
+<h2 id="Rviz"><a href="#Rviz" class="headerlink" title="Rviz"></a>Rviz</h2><ul>
+<li>三维可视化工具</li>
+</ul>
+<h2 id="Gazebo"><a href="#Gazebo" class="headerlink" title="Gazebo"></a>Gazebo</h2><h1 id="一些琐碎信息的整理"><a href="#一些琐碎信息的整理" class="headerlink" title="一些琐碎信息的整理"></a>一些琐碎信息的整理</h1><p>这周主要是复现的古月居老师课程里的代码实现环节</p>
+<p>不求背住每一个细节和命令</p>
+<p>需要达到的目标是当需要某个功能的时候能够想到在哪里，对着老师的课件实现自己想要的功能</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/hiroi-sora/Umi-OCR">文字识别软件</a></p>
+<p>注意：</p>
+<p>命令行和cmakelist里面的语句不要少了空格</p>
+<p>注意第11节第6页有一个错误，rosrun里面应该是pose_publisher</p>
+<ul>
+<li>三维物理仿真平台</li>
+<li>使用老师教学包里python程序，要把python文件的第一行改成python3<br><img src="https://img-blog.csdnimg.cn/aae6b0af617a4420bc8bd34c2e7328b3.png" alt="在这里插入图片描述"></li>
+</ul>
+<p>运行python的时候记得改成python3的语法<br>运行phthon文件的命令在11讲里有</p>
+<p>有什么好说的呢，出错的地方跟着弹幕大佬改就好了<br><img src="https://img-blog.csdnimg.cn/4237c32022084178bfd02a6983a8120b.png" alt="在这里插入图片描述"><br>这里可以调整文本格式，达到高亮效果</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://shihantian.github.io/2022/12/20/%E5%8F%A4%E6%9C%88%E5%B1%85%E3%80%8AROS%E5%85%A5%E9%97%A821%E8%AE%B2%E3%80%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2023/09/28/Stable_Diffrsion%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Shi Hantian's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2024/03/">March 2024<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2024/02/">February 2024<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2024/01/">January 2024<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2023/09/">September 2023<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2022/12/">December 2022<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/bollnh/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            Theme - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;Hantian's blog
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/bollnh/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//.disqus.com/count.js" async></script>
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<!-- <script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script> -->
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 0000;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/bollnh/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
