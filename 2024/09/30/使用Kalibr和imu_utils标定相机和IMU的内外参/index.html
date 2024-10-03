@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>使用Kalibr和imu_utils标定相机和IMU的内外参 - Hantian&#039;s blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hantian&#039;s blog"><meta name="msapplication-TileImage" content="/img/kakashi_avatar.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hantian&#039;s blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="摄像头和IMU内参标定以及其外参标定使用工具：Kalibr，imu_utils 标定目的： 飞机上使用的是realsense双目摄像头，以及飞控内置的IMU。不同传感器的数据需要被准确地整合。因此需要确定IMU、摄像头两目分别的内参，两目之间的外参以及IMU和相机之间的外参。"><meta property="og:type" content="blog"><meta property="og:title" content="使用Kalibr和imu_utils标定相机和IMU的内外参"><meta property="og:url" content="https://shihantian.github.io/2024/09/30/%E4%BD%BF%E7%94%A8Kalibr%E5%92%8Cimu_utils%E6%A0%87%E5%AE%9A%E7%9B%B8%E6%9C%BA%E5%92%8CIMU%E7%9A%84%E5%86%85%E5%A4%96%E5%8F%82/"><meta property="og:site_name" content="Hantian&#039;s blog"><meta property="og:description" content="摄像头和IMU内参标定以及其外参标定使用工具：Kalibr，imu_utils 标定目的： 飞机上使用的是realsense双目摄像头，以及飞控内置的IMU。不同传感器的数据需要被准确地整合。因此需要确定IMU、摄像头两目分别的内参，两目之间的外参以及IMU和相机之间的外参。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/markdown_images/main-2024-10-01-19-51-09.png"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/markdown_images/main-2024-09-29-17-03-13.png"><meta property="article:published_time" content="2024-09-29T16:00:00.000Z"><meta property="article:modified_time" content="2024-09-29T16:00:00.000Z"><meta property="article:author" content="Shi Hantian"><meta property="article:tag" content="教程"><meta property="article:tag" content="AIGC"><meta property="article:tag" content="AI"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/markdown_images/main-2024-10-01-19-51-09.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://shihantian.github.io/2024/09/30/%E4%BD%BF%E7%94%A8Kalibr%E5%92%8Cimu_utils%E6%A0%87%E5%AE%9A%E7%9B%B8%E6%9C%BA%E5%92%8CIMU%E7%9A%84%E5%86%85%E5%A4%96%E5%8F%82/"},"headline":"使用Kalibr和imu_utils标定相机和IMU的内外参","image":["https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/markdown_images/main-2024-10-01-19-51-09.png","https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/markdown_images/main-2024-09-29-17-03-13.png"],"datePublished":"2024-09-29T16:00:00.000Z","dateModified":"2024-09-29T16:00:00.000Z","author":{"@type":"Person","name":"Shi Hantian"},"publisher":{"@type":"Organization","name":"Hantian's blog","logo":{"@type":"ImageObject","url":"https://shihantian.github.io/img/kakashi_avatar.jpg"}},"description":"摄像头和IMU内参标定以及其外参标定使用工具：Kalibr，imu_utils 标定目的： 飞机上使用的是realsense双目摄像头，以及飞控内置的IMU。不同传感器的数据需要被准确地整合。因此需要确定IMU、摄像头两目分别的内参，两目之间的外参以及IMU和相机之间的外参。"}</script><link rel="canonical" href="https://shihantian.github.io/2024/09/30/%E4%BD%BF%E7%94%A8Kalibr%E5%92%8Cimu_utils%E6%A0%87%E5%AE%9A%E7%9B%B8%E6%9C%BA%E5%92%8CIMU%E7%9A%84%E5%86%85%E5%A4%96%E5%8F%82/"><link rel="icon" href="/img/kakashi_avatar.jpg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/kakashi_avatar.jpg" alt="Hantian&#039;s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ShiHantian"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-09-29T16:00:00.000Z" title="2024/9/30 00:00:00">2024-09-30</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-09-29T16:00:00.000Z" title="2024/9/30 00:00:00">2024-09-30</time></span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span> / </span><a class="link-muted" href="/categories/%E6%95%99%E7%A8%8B/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></span><span class="level-item">18 minutes read (About 2629 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">使用Kalibr和imu_utils标定相机和IMU的内外参</h1><div class="content"><h1 id="摄像头和IMU内参标定以及其外参标定"><a href="#摄像头和IMU内参标定以及其外参标定" class="headerlink" title="摄像头和IMU内参标定以及其外参标定"></a>摄像头和IMU内参标定以及其外参标定</h1><p>使用工具：<a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr"><strong>Kalibr</strong></a>，<a target="_blank" rel="noopener" href="https://github.com/gaowenliang/imu_utils"><strong>imu_utils</strong></a></p>
+<p>标定目的：</p>
+<p>飞机上使用的是realsense双目摄像头，以及飞控内置的IMU。不同传感器的数据需要被准确地整合。因此需要确定IMU、摄像头两目分别的内参，两目之间的外参以及IMU和相机之间的外参。</p>
+<span id="more"></span>
+
+<p>操作思路：</p>
+<ol>
+<li>飞机上安装好传感器，机载电脑需安装ROS以及IMU, realsense的驱动；工作站上安装好ROS</li>
+<li>在工作站上安装imu_utils用于标定IMU的内参，安装Kalibr用于标定摄像头内参以及IMU和摄像头的外参</li>
+<li>在飞机上录制IMU和摄像头的数据，并传输到工作站上</li>
+<li>在工作站上使用imu_utils标定IMU的内参，使用Kalibr标定摄像头内参以及IMU和摄像头的外参</li>
+</ol>
+<h2 id="0-Environment"><a href="#0-Environment" class="headerlink" title="0. Environment"></a>0. Environment</h2><p>介绍本标定实验使用的环境。其它软硬件当然也可以，但是需要做相应调整</p>
+<h3 id="Drone’s-onboard-computer"><a href="#Drone’s-onboard-computer" class="headerlink" title="Drone’s onboard computer"></a>Drone’s onboard computer</h3><h4 id="Hardware"><a href="#Hardware" class="headerlink" title="Hardware"></a>Hardware</h4><ul>
+<li>Core board: Jetson (ARM Architecture)</li>
+<li>Carrier Board: Damiao v1.1 nx carrier board</li>
+<li>Camera: Intel Realsense D430 (without IMU)</li>
+<li>IMU: pixhawk mini 6c’s built-in IMU</li>
+<li>FCU-Computer connection: USB c2c (instead of telem2uart)</li>
+</ul>
+<h4 id="Software-preparation"><a href="#Software-preparation" class="headerlink" title="Software preparation"></a>Software preparation</h4><ul>
+<li>Ubuntu 20.04</li>
+<li>ROS Noetic (ROS1)</li>
+<li>librealsense installed (sdk2.0)</li>
+<li>realsense-ros installed <a target="_blank" rel="noopener" href="https://github.com/IntelRealSense/realsense-ros/tree/ros1-legacy">ros1-legacy</a></li>
+<li>mavros installed</li>
+<li>Terminal: bash</li>
+</ul>
+<h3 id="Workstation"><a href="#Workstation" class="headerlink" title="Workstation"></a>Workstation</h3><h4 id="Software"><a href="#Software" class="headerlink" title="Software"></a>Software</h4><ul>
+<li>Ubuntu 20.04</li>
+<li>ROS Noetic (ROS1)</li>
+<li>Terminal: zsh</li>
+</ul>
+<h2 id="1-Install-Kalibr-and-imu-utils-in-workstation"><a href="#1-Install-Kalibr-and-imu-utils-in-workstation" class="headerlink" title="1. Install Kalibr and imu_utils (in workstation)"></a>1. Install Kalibr and imu_utils (in workstation)</h2><h3 id="Install-Kalibr"><a href="#Install-Kalibr" class="headerlink" title="Install Kalibr"></a>Install Kalibr</h3><p>按照<a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr/wiki/installation">官方教程 Installation — Building Kalibr from Source</a>来就行</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token punctuation">\</span>
+    <span class="token function">git</span> <span class="token function">wget</span> autoconf automake <span class="token function">nano</span> <span class="token punctuation">\</span>
+    libeigen3-dev libboost-all-dev libsuitesparse-dev <span class="token punctuation">\</span>
+    doxygen libopencv-dev <span class="token punctuation">\</span>
+    libpoco-dev libtbb-dev libblas-dev liblapack-dev libv4l-dev
+    
+<span class="token comment"># Ubuntu 20.04</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> python3-dev python3-pip python3-scipy <span class="token punctuation">\</span>
+    python3-matplotlib ipython3 python3-wxgtk4.0 python3-tk python3-igraph python3-pyx
+
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ~/kalibr_workspace/src
+<span class="token builtin class-name">cd</span> ~/kalibr_workspace
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ROS1_DISTRO</span><span class="token operator">=</span>noetic <span class="token comment"># kinetic=16.04, melodic=18.04, noetic=20.04</span>
+<span class="token builtin class-name">source</span> /opt/ros/<span class="token variable">$ROS1_DISTRO</span>/setup.bash
+catkin init
+catkin config <span class="token parameter variable">--extend</span> /opt/ros/<span class="token variable">$ROS1_DISTRO</span>
+catkin config --merge-devel <span class="token comment"># Necessary for catkin_tools >= 0.4.</span>
+catkin config --cmake-args <span class="token parameter variable">-DCMAKE_BUILD_TYPE</span><span class="token operator">=</span>Release
+
+<span class="token builtin class-name">cd</span> ~/kalibr_workspace/src
+<span class="token function">git</span> clone https://github.com/ethz-asl/kalibr.git
+
+<span class="token builtin class-name">cd</span> ~/kalibr_workspace/
+catkin build <span class="token parameter variable">-DCMAKE_BUILD_TYPE</span><span class="token operator">=</span>Release <span class="token parameter variable">-j16</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Install-imu-utils"><a href="#Install-imu-utils" class="headerlink" title="Install imu_utils"></a>Install imu_utils</h3><ol>
+<li>首先安装好依赖的库</li>
+<li>创建catkin_ws&#x2F;src</li>
+<li>将code_utils仓库克隆到catkin_ws&#x2F;src进行编译</li>
+<li>code_utils编译之后再将code_utils放在src路径下，再编译</li>
+</ol>
+<h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libdw-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libceres-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="编译安装code-utils"><a href="#编译安装code-utils" class="headerlink" title="编译安装code_utils"></a>编译安装code_utils</h4><p>code_utils仓库：<a target="_blank" rel="noopener" href="https://github.com/gaowenliang/code_utils">点击跳转</a></p>
+<p>将源码克隆下来之后，需要修改一堆东西：</p>
+<ol>
+<li>CMakeLists.txt</li>
+</ol>
+<p><code>set(CMAKE_CXX_FLAGS &quot;-std=c++11&quot;)</code>修改为<code>set(CMAKE_CXX_FLAGS &quot;-std=c++14&quot;)</code></p>
+<ol start="2">
+<li>sumpixel_test.cpp</li>
+</ol>
+<p><code>#include &quot;backward.hpp&quot;</code>修改为 <code>#include &quot;code_utils/backward.hpp&quot;</code></p>
+<p>添加头文件： <code>#include &lt;opencv2/imgcodecs.hpp&gt;</code></p>
+<p>然后就可以使用catkin工具编译了</p>
+<ol start="3">
+<li>opencv宏的修改</li>
+</ol>
+<p>需要修改的地方还挺多，可以使用搜索工具查找</p>
+<p>所有<code>CV_LOAD_IMAGE_UNCHANGED</code> 改为 <code>cv::IMREAD_UNCHANGED</code></p>
+<p>所有<code>CV_LOAD_IMAGE_GRAYSCALE</code> 改为 <code>cv::IMREAD_GRAYSCALE</code></p>
+<h4 id="编译安装imu-utils"><a href="#编译安装imu-utils" class="headerlink" title="编译安装imu_utils"></a>编译安装imu_utils</h4><p>imu_utils仓库：<a target="_blank" rel="noopener" href="https://github.com/gaowenliang/imu_utils">点击跳转</a></p>
+<ol>
+<li>CMakeLists.txt</li>
+</ol>
+<p><code>set(CMAKE_CXX_FLAGS &quot;-std=c++11&quot;)</code>修改为<code>set(CMAKE_CXX_FLAGS &quot;-std=c++14&quot;)</code></p>
+<ol start="2">
+<li>imu_an.cpp</li>
+</ol>
+<p>添加头文件： <code>#include &lt;fstream&gt;</code></p>
+<p>然后使用catkin工具编译即可</p>
+<h2 id="2-Record-rosbag-on-plane"><a href="#2-Record-rosbag-on-plane" class="headerlink" title="2. Record rosbag (on plane)"></a>2. Record rosbag (on plane)</h2><h3 id="Record-IMU-data"><a href="#Record-IMU-data" class="headerlink" title="Record IMU data"></a>Record IMU data</h3><ol>
+<li>启动px4节点</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">777</span> /dev/ttyACM0
+
+roslaunch mavros px4.launch<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>调整IMU频率</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rosrun mavros mavcmd long <span class="token number">511</span> <span class="token number">105</span> <span class="token number">5000</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span>
+
+rosrun mavros mavcmd long <span class="token number">511</span> <span class="token number">31</span> <span class="token number">5000</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>第一条命令调整&#x2F;mavros&#x2F;imu&#x2F;data_raw的话题频率为200Hz，第二条调整&#x2F;mavros&#x2F;imu&#x2F;data的话题频率为200Hz</p>
+<p>提高频率之后使用如下命令检查IMU频率，应该是200Hz左右</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rostopic hz /mavros/imu/data_raw
+
+rostopic hz /mavros/imu/data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>录制数据包</li>
+</ol>
+<p>需要静止录制，官方推荐两小时，至少需要一小时</p>
+<p>可以把data和data_raw的数据都录下来</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rosbag record <span class="token parameter variable">--duration</span><span class="token operator">=</span>120m <span class="token parameter variable">-o</span> ~/Desktop/imu_calibration/imu_calibration /mavros/imu/data_raw /mavros/imu/data<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="Calibration-targets-preparation"><a href="#Calibration-targets-preparation" class="headerlink" title="Calibration targets preparation"></a>Calibration targets preparation</h3><p>摄像头标定以及摄像头-IMU联合标定都需要一个标定板</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr/wiki/calibration-targets">点击跳转官方文档 Calibration targets </a></p>
+<p>可以在<a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr/wiki/downloads">kalibr&#x2F;wiki&#x2F;downloads</a>直接下载Aprilgrid 6x6 0.8x0.8 m (A0 page)的pdf文件和yaml文件。使用A4纸打印出来即可。但是yaml文件里的参数需要修改。</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/markdown_images/main-2024-10-01-19-51-09.png" alt="main-2024-10-01-19-51-09" width=70%" /> </p>
+
+<p>图片来自官方wiki。参数文件中tagSize和tagSpacing两个参数的含义如图所示</p>
+<p>标定板yaml文件<code>aprilgrid_A4.yaml</code>：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">target_type</span><span class="token punctuation">:</span> <span class="token string">'aprilgrid'</span> <span class="token comment">#gridtype</span>
+<span class="token key atrule">tagCols</span><span class="token punctuation">:</span> <span class="token number">6</span>               <span class="token comment">#number of apriltags</span>
+<span class="token key atrule">tagRows</span><span class="token punctuation">:</span> <span class="token number">6</span>               <span class="token comment">#number of apriltags</span>
+<span class="token key atrule">tagSize</span><span class="token punctuation">:</span> <span class="token number">0.0205</span>          <span class="token comment">#size of apriltag, edge to edge [m]</span>
+<span class="token key atrule">tagSpacing</span><span class="token punctuation">:</span> <span class="token number">0.2927</span>       <span class="token comment">#ratio of space between tags to tagSize</span>
+                         <span class="token comment">#example: tagSize=2m, spacing=0.5m --> tagSpacing=0.25[-]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以上参数是用A4纸自适应大小打印<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/14dY7z8pDb2iEBdveTviDXsoi5H9AaQP1/view">Aprilgrid 6x6 0.8x0.8 m (A0 page)</a>的参数。具体参数用尺测量即可</p>
+<h3 id="Record-camera-data"><a href="#Record-camera-data" class="headerlink" title="Record camera data"></a>Record camera data</h3><ol>
+<li>启动realsense摄像头节点</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">roslaunch realsense2_camera rs_d430.launch<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>另开两个终端，调整两个摄像头的话题频率</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rosrun topic_tools throttle messages /camera/infra1/image_rect_raw <span class="token number">4.0</span> /infra1_image_rect_raw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rosrun topic_tools throttle messages /camera/infra2/image_rect_raw <span class="token number">4.0</span> /infra2_image_rect_raw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>两个新的话题将以4Hz的频率发布图像数据，话题名称分别为infra1_image_rect_raw和infra2_image_rect_raw</p>
+<ol start="3">
+<li>再开两个终端，使用rqt_image_view监测摄像头画面</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rqt_image_view /infra1_image_rect_raw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rqt_image_view /infra2_image_rect_raw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="4">
+<li>录制rosbag</li>
+</ol>
+<p>录制时的手法演示：<a target="_blank" rel="noopener" href="https://youtu.be/puNXsnrYWTY?si=UdVQJvBTxc3PWFxg">Youtube-DIY Indoor Autonomous Drone! - Part 2 (Kalibr &amp; Calibration)</a> 第57秒开始</p>
+<ul>
+<li>录制150秒</li>
+<li>保存到<code>~/Desktop/camera_calibration/</code>路径下，文件名为”camera_calibration+时间戳+.bag”</li>
+<li>记录<code>infra1_image_rect_raw</code>和<code>infra2_image_rect_raw</code>两个话题</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rosbag record <span class="token punctuation">\</span>
+  <span class="token parameter variable">--duration</span><span class="token operator">=</span><span class="token number">150</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">-o</span> ~/Desktop/camera_calibration/camera_calibration <span class="token punctuation">\</span>
+  /infra1_image_rect_raw <span class="token punctuation">\</span>
+  /infra2_image_rect_raw<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>整理为自动化脚本</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># 启动第一个终端 启动realsense节点 </span>
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'The first terminal to launch realsense node'; roslaunch realsense2_camera rs_d430.launch; exec bash"</span>
+<span class="token comment"># 等待10秒钟 等摄像头节点完全启动</span>
+<span class="token function">sleep</span> <span class="token number">10</span>
+
+<span class="token comment"># 启动第二个终端 调整第一个摄像头的话题频率</span>
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'The second terminal to modify the frame rate'; rosrun topic_tools throttle messages /camera/infra1/image_rect_raw 4.0 /infra1_image_rect_raw; exec bash"</span>
+<span class="token comment"># 启动第三个终端 调整第二个摄像头的话题频率</span>
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'The third  terminal to modify the frame rate'; rosrun topic_tools throttle messages /camera/infra2/image_rect_raw 4.0 /infra2_image_rect_raw; exec bash"</span>
+
+<span class="token comment"># 启动两个终端，使用rqt_image监测两个摄像头的内容</span>
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'The fourth terminal to monitor the first camera'; rqt_image_view /infra1_image_rect_raw; exec bash"</span>
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'The fifth terminal to monitor the second camera'; rqt_image_view /infra2_image_rect_raw; exec bash"</span>
+
+<span class="token comment"># 留15秒钟时间做录制准备</span>
+<span class="token comment"># 调整rqt窗口位置，调整摄像头位置</span>
+<span class="token function">sleep</span> <span class="token number">15</span>
+
+<span class="token comment"># 启动录制脚本</span>
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'Start recording'; rosbag record --duration=150 -o ~/Desktop/camera_calibration/camera_calibration /infra1_image_rect_raw /infra2_image_rect_raw; exec bash"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Record-camera-IMU-data"><a href="#Record-camera-IMU-data" class="headerlink" title="Record camera-IMU data"></a>Record camera-IMU data</h3><p>和摄像头数据录制类似，增加启动IMU节点和的步骤以及录包时录上IMU的数据</p>
+<p>自动化脚本如下</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># Starting the imu</span>
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'Terminal for starting imu'; 
+PASSWORD='1'; 
+echo <span class="token variable">$PASSWORD</span> | sudo -S chmod 777 /dev/ttyACM0;
+roslaunch mavros px4.launch;
+exec bash"</span>
+
+<span class="token function">sleep</span> <span class="token number">10</span>
+
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'Terminal for changing the rate of imu topic';
+rosrun mavros mavcmd long 511 105 5000 0 0 0 0 0;
+rosrun mavros mavcmd long 511 31 5000 0 0 0 0 0;
+exec bash"</span>
+<span class="token function">sleep</span> <span class="token number">2</span>
+
+<span class="token comment"># Starting the cameras</span>
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'The first terminal to launch realsense node'; roslaunch realsense2_camera rs_d430.launch; exec bash"</span>
+<span class="token function">sleep</span> <span class="token number">10</span>
+
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'The fourth terminal to monitor the first camera'; rqt_image_view /camera/infra1/image_rect_raw; exec bash"</span>
+<span class="token function">sleep</span> <span class="token number">2</span>
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'The fifth terminal to monitor the second camera'; rqt_image_view /camera/infra2/image_rect_raw; exec bash"</span>
+
+<span class="token comment"># Ensure directory exists</span>
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ~/Desktop/camera_imu_calibration
+<span class="token comment"># 等待15秒钟 准备开启录制窗口</span>
+<span class="token function">sleep</span> <span class="token number">15</span>
+
+gnome-terminal -- <span class="token function">bash</span> <span class="token parameter variable">-c</span> <span class="token string">"echo 'Start recording'; rosbag record --duration=120 -o ~/Desktop/camera_imu_calibration/camera_imu_calibration /camera/infra1/image_rect_raw /camera/infra2/image_rect_raw /mavros/imu/data /mavros/imu/data_raw; exec bash"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="3-Calibration-on-workstation"><a href="#3-Calibration-on-workstation" class="headerlink" title="3. Calibration (on workstation)"></a>3. Calibration (on workstation)</h2><h3 id="IMU-calibration"><a href="#IMU-calibration" class="headerlink" title="IMU calibration"></a>IMU calibration</h3><ol>
+<li>编写launch文件</li>
+</ol>
+<p>参考<a target="_blank" rel="noopener" href="https://github.com/gaowenliang/imu_utils?tab=readme-ov-file">官方REAEDME</a> <strong>to run</strong> 部分</p>
+<p>px4_calibration.launch文件内容如下:</p>
+<pre class="line-numbers language-launch" data-language="launch"><code class="language-launch">&lt;launch&gt;
+    &lt;node pkg&#x3D;&quot;imu_utils&quot; type&#x3D;&quot;imu_an&quot; name&#x3D;&quot;imu_an&quot; output&#x3D;&quot;screen&quot;&gt;
+        &lt;param name&#x3D;&quot;imu_topic&quot; type&#x3D;&quot;string&quot; value&#x3D; &quot;&#x2F;djiros&#x2F;imu&quot;&#x2F;&gt;
+        &lt;param name&#x3D;&quot;imu_name&quot; type&#x3D;&quot;string&quot; value&#x3D; &quot;A3&quot;&#x2F;&gt;
+        &lt;param name&#x3D;&quot;data_save_path&quot; type&#x3D;&quot;string&quot; value&#x3D; &quot;$(find imu_utils)&#x2F;data&#x2F;&quot;&#x2F;&gt;
+        &lt;param name&#x3D;&quot;max_time_min&quot; type&#x3D;&quot;int&quot; value&#x3D; &quot;120&quot;&#x2F;&gt;
+        &lt;param name&#x3D;&quot;max_cluster&quot; type&#x3D;&quot;int&quot; value&#x3D; &quot;100&quot;&#x2F;&gt;
+    &lt;&#x2F;node&gt;
+&lt;&#x2F;launch&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>imu_topic的参数值，修改为录制时话题的名称</li>
+<li>max_time的参数值，需要小于录包时长</li>
+</ul>
+<ol start="2">
+<li>启动刚编写好的launch文件</li>
+</ol>
+<pre class="line-numbers language-zsh" data-language="zsh"><code class="language-zsh">source devel&#x2F;setup.zsh
+roslaunch imu_utils px4_calibration.launch<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>播放录制的IMU数据包</li>
+</ol>
+<pre class="line-numbers language-zsh" data-language="zsh"><code class="language-zsh">rosbag play -r 200 imu.bag<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="Camera-calibration-Using-Kalibr"><a href="#Camera-calibration-Using-Kalibr" class="headerlink" title="Camera calibration (Using Kalibr)"></a>Camera calibration (Using Kalibr)</h3><p>官方文档： <a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr/wiki/multiple-camera-calibration">Kalibr - Multiple camera calibration - wiki page</a></p>
+<h4 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h4><ol>
+<li>刚才录制的摄像头数据包</li>
+<li>标定板yaml参数文件</li>
+</ol>
+<h4 id="运行标定"><a href="#运行标定" class="headerlink" title="运行标定"></a>运行标定</h4><p>启动roscore, 并运行如下脚本</p>
+<pre class="line-numbers language-zsh" data-language="zsh"><code class="language-zsh">source ~&#x2F;kalibr_workspace&#x2F;devel&#x2F;setup.zsh
+
+rosrun kalibr kalibr_calibrate_cameras \
+  --bag camera_calibration_2024-09-29-00-43-00.bag \
+  --topics &#x2F;infra1_image_rect_raw &#x2F;infra2_image_rect_raw \
+  --models pinhole-radtan pinhole-radtan \
+  --target aprilgrid_A4.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>bag后面跟包名，注意相对路径</li>
+<li>topics后面跟话题名，注意和录制的话题名一致</li>
+<li>models后面跟相机模型，realsense d430用的是pinhole-radtan。两个摄像头就需要写两次</li>
+</ul>
+<h3 id="Camera-IMU-calibration-Using-Kalibr"><a href="#Camera-IMU-calibration-Using-Kalibr" class="headerlink" title="Camera-IMU calibration (Using Kalibr)"></a>Camera-IMU calibration (Using Kalibr)</h3><h4 id="文件准备-1"><a href="#文件准备-1" class="headerlink" title="文件准备"></a>文件准备</h4><ol>
+<li>刚才录制的摄像头+IMU数据包</li>
+<li>标定板yaml文件（和摄像头内参标定是用的一样）</li>
+<li>IMU yaml文件 （需从IMU标定生成的yaml文件中提取）</li>
+<li>camera yaml文件 （摄像头标定后生成的）</li>
+</ol>
+<p>参数文件标准格式示例网站：<a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr/wiki/yaml-formats">Kalibr - Yaml formats - wiki page</a></p>
+<p>IMU yaml文件迁移示例（从imu_utils标定的参数结果文件迁移）：</p>
+<p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/markdown_images/main-2024-09-29-17-03-13.png" alt="main-2024-09-29-17-03-13" width=70%" /> </p>
+
+<h4 id="运行标定-1"><a href="#运行标定-1" class="headerlink" title="运行标定"></a>运行标定</h4><p>启动roscore, 并运行如下脚本</p>
+<pre class="line-numbers language-zsh" data-language="zsh"><code class="language-zsh">source ~&#x2F;kalibr_workspace&#x2F;devel&#x2F;setup.zsh
+
+rosrun kalibr kalibr_calibrate_imu_camera \
+    --target aprilgrid_A4.yaml \
+    --cam camera_calibration_2024-09-29-00-43-00-camchain.yaml \
+    --imu imu.yaml \
+    --bag camera_imu_calibration_2024-09-29-01-32-19.bag \
+    --bag-from-to 10 110<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>target 后面加标定板参数文件</li>
+<li>cam 后面加摄像头参数文件。注意参数文件中的话题名称要调整为camera_imu联合录制的包里面对应的话题名称</li>
+<li>imu 后面加IMU参数文件</li>
+<li>bag 后面加数据包文件</li>
+<li>bag-from-to 后面加数据包开始和结束时间（单位：秒）（这里选择10~110秒弃用开始和结尾的一小段数据）</li>
+</ul>
+<h2 id="References-Navigation"><a href="#References-Navigation" class="headerlink" title="References &amp; Navigation"></a>References &amp; Navigation</h2><p>[0] 首先感谢wh浩哥和师兄lcz泽总的帮助🤩🤩🤩</p>
+<p>[1] <a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr"><strong>Kalibr</strong> github repository</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://github.com/gaowenliang/imu_utils"><strong>imu_utils</strong> github repository</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://github.com/gaowenliang/code_utils"><strong>code_utils</strong> github repository</a></p>
+<p>[4] <a target="_blank" rel="noopener" href="https://immortalqx.github.io/2021/07/04/kalibr-for-camera-imu-calibration/#3-%E8%BF%9B%E8%A1%8CCamera-IMU%E8%81%94%E5%90%88%E6%A0%87%E5%AE%9A">使用kalibr进行Camera-IMU联合标定</a></p>
+<p>[5] <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39607707/article/details/125061020?ops_request_misc=%257B%2522request%255Fid%2522%253A%252279C389A6-FF8B-4298-8608-044D7569BA9A%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=79C389A6-FF8B-4298-8608-044D7569BA9A&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-125061020-null-null.142%5Ev100%5Epc_search_result_base4&utm_term=imu_utils&spm=1018.2226.3001.4187">Ubuntu20.04编译并运行imu_utils，并且标定IMU</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>使用Kalibr和imu_utils标定相机和IMU的内外参</p><p><a href="https://shihantian.github.io/2024/09/30/使用Kalibr和imu_utils标定相机和IMU的内外参/">https://shihantian.github.io/2024/09/30/使用Kalibr和imu_utils标定相机和IMU的内外参/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Shi Hantian</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2024-09-30</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2024-09-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%95%99%E7%A8%8B/">教程</a><a class="link-muted mr-2" rel="tag" href="/tags/AIGC/">AIGC</a><a class="link-muted mr-2" rel="tag" href="/tags/AI/">AI</a></div><div class="bdsharebuttonbox"><a class="bds_more" href="#" data-cmd="more"></a><a class="bds_qzone" href="#" data-cmd="qzone" title="分享到QQ空间"></a><a class="bds_tsina" href="#" data-cmd="tsina" title="分享到新浪微博"></a><a class="bds_tqq" href="#" data-cmd="tqq" title="分享到腾讯微博"></a><a class="bds_renren" href="#" data-cmd="renren" title="分享到人人网"></a><a class="bds_weixin" href="#" data-cmd="weixin" title="分享到微信"></a></div><script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/09/04/ESP32%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"><span class="level-item">ESP32使用笔记</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/kakashi_avatar.jpg" alt="Shi Hantian"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Shi Hantian</p><p class="is-size-6 is-block">Moran</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Arrakis, Canopus</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">16</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">40</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ShiHantian" target="_blank" rel="noopener">Follow</a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#摄像头和IMU内参标定以及其外参标定"><span class="level-left"><span class="level-item">1</span><span class="level-item">摄像头和IMU内参标定以及其外参标定</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#0-Environment"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">0. Environment</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Drone’s-onboard-computer"><span class="level-left"><span class="level-item">1.1.1</span><span class="level-item">Drone’s onboard computer</span></span></a></li><li><a class="level is-mobile" href="#Workstation"><span class="level-left"><span class="level-item">1.1.2</span><span class="level-item">Workstation</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-Install-Kalibr-and-imu-utils-in-workstation"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">1. Install Kalibr and imu_utils (in workstation)</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Install-Kalibr"><span class="level-left"><span class="level-item">1.2.1</span><span class="level-item">Install Kalibr</span></span></a></li><li><a class="level is-mobile" href="#Install-imu-utils"><span class="level-left"><span class="level-item">1.2.2</span><span class="level-item">Install imu_utils</span></span></a></li></ul></li><li><a class="level is-mobile" href="#2-Record-rosbag-on-plane"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">2. Record rosbag (on plane)</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Record-IMU-data"><span class="level-left"><span class="level-item">1.3.1</span><span class="level-item">Record IMU data</span></span></a></li><li><a class="level is-mobile" href="#Calibration-targets-preparation"><span class="level-left"><span class="level-item">1.3.2</span><span class="level-item">Calibration targets preparation</span></span></a></li><li><a class="level is-mobile" href="#Record-camera-data"><span class="level-left"><span class="level-item">1.3.3</span><span class="level-item">Record camera data</span></span></a></li><li><a class="level is-mobile" href="#Record-camera-IMU-data"><span class="level-left"><span class="level-item">1.3.4</span><span class="level-item">Record camera-IMU data</span></span></a></li></ul></li><li><a class="level is-mobile" href="#3-Calibration-on-workstation"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">3. Calibration (on workstation)</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#IMU-calibration"><span class="level-left"><span class="level-item">1.4.1</span><span class="level-item">IMU calibration</span></span></a></li><li><a class="level is-mobile" href="#Camera-calibration-Using-Kalibr"><span class="level-left"><span class="level-item">1.4.2</span><span class="level-item">Camera calibration (Using Kalibr)</span></span></a></li><li><a class="level is-mobile" href="#Camera-IMU-calibration-Using-Kalibr"><span class="level-left"><span class="level-item">1.4.3</span><span class="level-item">Camera-IMU calibration (Using Kalibr)</span></span></a></li></ul></li><li><a class="level is-mobile" href="#References-Navigation"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">References &amp; Navigation</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-29T16:00:00.000Z">2024-09-30</time></p><p class="title"><a href="/2024/09/30/%E4%BD%BF%E7%94%A8Kalibr%E5%92%8Cimu_utils%E6%A0%87%E5%AE%9A%E7%9B%B8%E6%9C%BA%E5%92%8CIMU%E7%9A%84%E5%86%85%E5%A4%96%E5%8F%82/">使用Kalibr和imu_utils标定相机和IMU的内外参</a></p><p class="categories"><a href="/categories/%E6%95%99%E7%A8%8B/">教程</a> / <a href="/categories/%E6%95%99%E7%A8%8B/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-09-03T16:00:00.000Z">2024-09-04</time></p><p class="title"><a href="/2024/09/04/ESP32%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">ESP32使用笔记</a></p><p class="categories"><a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a> / <a href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-05-27T16:00:00.000Z">2024-05-28</time></p><p class="title"><a href="/2024/05/28/ENGR1000J-S2-SU24/">工程学导论Tech Tutorial</a></p><p class="categories"><a href="/categories/%E6%95%99%E7%A8%8B/">教程</a> / <a href="/categories/%E6%95%99%E7%A8%8B/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-14T16:00:00.000Z">2024-04-15</time></p><p class="title"><a href="/2024/04/15/%E7%94%B5%E6%B1%A0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%8F%8A%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BE%9B%E7%94%B5%E8%AE%BE%E8%AE%A1/">电池相关知识及机器人供电设计</a></p><p class="categories"><a href="/categories/%E6%95%99%E7%A8%8B/">教程</a> / <a href="/categories/%E6%95%99%E7%A8%8B/%E7%94%B5%E8%B7%AF/">电路</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-27T16:00:00.000Z">2024-03-28</time></p><p class="title"><a href="/2024/03/28/%E4%BD%BF%E7%94%A8vercel%E4%B8%80%E5%88%86%E9%92%9F%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E9%A1%B5/">使用vercel快速部署静态网页</a></p><p class="categories"><a href="/categories/%E6%95%99%E7%A8%8B/">教程</a> / <a href="/categories/%E6%95%99%E7%A8%8B/Web/">Web</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/09/"><span class="level-start"><span class="level-item">September 2024</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/05/"><span class="level-start"><span class="level-item">May 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/04/"><span class="level-start"><span class="level-item">April 2024</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/03/"><span class="level-start"><span class="level-item">March 2024</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">February 2024</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/01/"><span class="level-start"><span class="level-item">January 2024</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">December 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">September 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/12/"><span class="level-start"><span class="level-item">December 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AI/"><span class="tag">AI</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AIGC/"><span class="tag">AIGC</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Arduino/"><span class="tag">Arduino</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CSS/"><span class="tag">CSS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Clash/"><span class="tag">Clash</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ELRS/"><span class="tag">ELRS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ESP32/"><span class="tag">ESP32</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/FPV/"><span class="tag">FPV</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTML/"><span class="tag">HTML</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PicGo/"><span class="tag">PicGo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ROS/"><span class="tag">ROS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Shell/"><span class="tag">Shell</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Solidworks/"><span class="tag">Solidworks</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/VScode/"><span class="tag">VScode</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Web/"><span class="tag">Web</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/blog/"><span class="tag">blog</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/github/"><span class="tag">github</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/markdown/"><span class="tag">markdown</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BB%A3%E7%90%86/"><span class="tag">代理</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%AB%AF/"><span class="tag">前端</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"><span class="tag">单片机</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BA%E4%BB%B6/"><span class="tag">固件</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/"><span class="tag">开源软件</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="tag">操作系统</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%99%E7%A8%8B/"><span class="tag">教程</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%BA%E5%99%A8%E4%BA%BA/"><span class="tag">机器人</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%BA%E6%A2%B0%E5%8A%A0%E5%B7%A5/"><span class="tag">机械加工</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%88%AC%E8%99%AB/"><span class="tag">爬虫</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/"><span class="tag">物联网</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/"><span class="tag">电路设计</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"><span class="tag">科学上网</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A9%BF%E8%B6%8A%E6%9C%BA/"><span class="tag">穿越机</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AC%94%E8%AE%B0/"><span class="tag">笔记</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/"><span class="tag">自动驾驶</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%88%AA%E6%A8%A1/"><span class="tag">航模</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%B5%84%E6%BA%90/"><span class="tag">资源</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%81%A5%E6%8E%A7%E5%99%A8/"><span class="tag">遥控器</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9B%B6%E5%9F%BA%E7%A1%80/"><span class="tag">零基础</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%AD%94%E6%B3%95/"><span class="tag">魔法</span><span class="tag">2</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">教程</span></span><span class="level-end"><span class="level-item tag">8</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E6%95%99%E7%A8%8B/AIGC/"><span class="level-start"><span class="level-item">AIGC</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%99%E7%A8%8B/CS/"><span class="level-start"><span class="level-item">CS</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%99%E7%A8%8B/Tips/"><span class="level-start"><span class="level-item">Tips</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%99%E7%A8%8B/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%99%E7%A8%8B/%E5%8D%95%E7%89%87%E6%9C%BA/"><span class="level-start"><span class="level-item">单片机</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%99%E7%A8%8B/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="level-start"><span class="level-item">嵌入式</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%99%E7%A8%8B/%E7%94%B5%E8%B7%AF/"><span class="level-start"><span class="level-item">电路</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">笔记</span></span><span class="level-end"><span class="level-item tag">8</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/CS/"><span class="level-start"><span class="level-item">CS</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/Crawler/"><span class="level-start"><span class="level-item">Crawler</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/FPV/"><span class="level-start"><span class="level-item">FPV</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/ROS/"><span class="level-start"><span class="level-item">ROS</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/Web/"><span class="level-start"><span class="level-item">Web</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%95%E7%89%87%E6%9C%BA/"><span class="level-start"><span class="level-item">单片机</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">教程</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/kakashi_avatar.jpg" alt="Hantian&#039;s blog" height="28"></a><p class="is-size-7"><span>&copy; 2024 Shi Hantian</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">Visited by <span id="busuanzi_value_site_uv">0</span> users</span></p><p class="is-size-7">© 2023</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ShiHantian"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script><script type="text/javascript" color="30,144,255" opacity="0.5" zIndex="-1" count="150" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script></body></html>
