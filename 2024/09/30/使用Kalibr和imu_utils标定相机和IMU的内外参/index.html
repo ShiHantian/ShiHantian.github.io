@@ -29,7 +29,7 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/kakashi_avatar.jpg" alt="Hantian&#039;s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ShiHantian"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-09-29T16:00:00.000Z" title="2024/9/30 00:00:00">2024-09-30</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-09-29T16:00:00.000Z" title="2024/9/30 00:00:00">2024-09-30</time></span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span> / </span><a class="link-muted" href="/categories/%E6%95%99%E7%A8%8B/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机</a></span><span class="level-item">18 minutes read (About 2629 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">使用Kalibr和imu_utils标定相机和IMU的内外参</h1><div class="content"><h1 id="摄像头和IMU内参标定以及其外参标定"><a href="#摄像头和IMU内参标定以及其外参标定" class="headerlink" title="摄像头和IMU内参标定以及其外参标定"></a>摄像头和IMU内参标定以及其外参标定</h1><p>使用工具：<a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr"><strong>Kalibr</strong></a>，<a target="_blank" rel="noopener" href="https://github.com/gaowenliang/imu_utils"><strong>imu_utils</strong></a></p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/kakashi_avatar.jpg" alt="Hantian&#039;s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ShiHantian"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-09-29T16:00:00.000Z" title="2024/9/30 00:00:00">2024-09-30</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-09-29T16:00:00.000Z" title="2024/9/30 00:00:00">2024-09-30</time></span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span> / </span><a class="link-muted" href="/categories/%E6%95%99%E7%A8%8B/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机</a></span><span class="level-item">18 minutes read (About 2628 words)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">使用Kalibr和imu_utils标定相机和IMU的内外参</h1><div class="content"><h1 id="摄像头和IMU内参标定以及其外参标定"><a href="#摄像头和IMU内参标定以及其外参标定" class="headerlink" title="摄像头和IMU内参标定以及其外参标定"></a>摄像头和IMU内参标定以及其外参标定</h1><p>使用工具：<a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr"><strong>Kalibr</strong></a>，<a target="_blank" rel="noopener" href="https://github.com/gaowenliang/imu_utils"><strong>imu_utils</strong></a></p>
 <p>标定目的：</p>
 <p>飞机上使用的是realsense双目摄像头，以及飞控内置的IMU。不同传感器的数据需要被准确地整合。因此需要确定IMU、摄像头两目分别的内参，两目之间的外参以及IMU和相机之间的外参。</p>
 <span id="more"></span>
@@ -68,7 +68,7 @@
     libeigen3-dev libboost-all-dev libsuitesparse-dev <span class="token punctuation">\</span>
     doxygen libopencv-dev <span class="token punctuation">\</span>
     libpoco-dev libtbb-dev libblas-dev liblapack-dev libv4l-dev
-    
+  
 <span class="token comment"># Ubuntu 20.04</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> python3-dev python3-pip python3-scipy <span class="token punctuation">\</span>
     python3-matplotlib ipython3 python3-wxgtk4.0 python3-tk python3-igraph python3-pyx
@@ -95,6 +95,7 @@ catkin build <span class="token parameter variable">-DCMAKE_BUILD_TYPE</span><sp
 <li>code_utils编译之后再将code_utils放在src路径下，再编译</li>
 </ol>
 <h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libdw-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libceres-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="编译安装code-utils"><a href="#编译安装code-utils" class="headerlink" title="编译安装code_utils"></a>编译安装code_utils</h4><p>code_utils仓库：<a target="_blank" rel="noopener" href="https://github.com/gaowenliang/code_utils">点击跳转</a></p>
@@ -102,7 +103,7 @@ catkin build <span class="token parameter variable">-DCMAKE_BUILD_TYPE</span><sp
 <ol>
 <li>CMakeLists.txt</li>
 </ol>
-<p><code>set(CMAKE_CXX_FLAGS &quot;-std=c++11&quot;)</code>修改为<code>set(CMAKE_CXX_FLAGS &quot;-std=c++14&quot;)</code></p>
+<p><code>set(CMAKE_CXX_FLAGS &quot;-std=c++11&quot;)</code>修改为 <code>set(CMAKE_CXX_FLAGS &quot;-std=c++14&quot;)</code></p>
 <ol start="2">
 <li>sumpixel_test.cpp</li>
 </ol>
@@ -113,13 +114,13 @@ catkin build <span class="token parameter variable">-DCMAKE_BUILD_TYPE</span><sp
 <li>opencv宏的修改</li>
 </ol>
 <p>需要修改的地方还挺多，可以使用搜索工具查找</p>
-<p>所有<code>CV_LOAD_IMAGE_UNCHANGED</code> 改为 <code>cv::IMREAD_UNCHANGED</code></p>
-<p>所有<code>CV_LOAD_IMAGE_GRAYSCALE</code> 改为 <code>cv::IMREAD_GRAYSCALE</code></p>
+<p>所有 <code>CV_LOAD_IMAGE_UNCHANGED</code> 改为 <code>cv::IMREAD_UNCHANGED</code></p>
+<p>所有 <code>CV_LOAD_IMAGE_GRAYSCALE</code> 改为 <code>cv::IMREAD_GRAYSCALE</code></p>
 <h4 id="编译安装imu-utils"><a href="#编译安装imu-utils" class="headerlink" title="编译安装imu_utils"></a>编译安装imu_utils</h4><p>imu_utils仓库：<a target="_blank" rel="noopener" href="https://github.com/gaowenliang/imu_utils">点击跳转</a></p>
 <ol>
 <li>CMakeLists.txt</li>
 </ol>
-<p><code>set(CMAKE_CXX_FLAGS &quot;-std=c++11&quot;)</code>修改为<code>set(CMAKE_CXX_FLAGS &quot;-std=c++14&quot;)</code></p>
+<p><code>set(CMAKE_CXX_FLAGS &quot;-std=c++11&quot;)</code>修改为 <code>set(CMAKE_CXX_FLAGS &quot;-std=c++14&quot;)</code></p>
 <ol start="2">
 <li>imu_an.cpp</li>
 </ol>
@@ -158,7 +159,7 @@ rostopic hz /mavros/imu/data<span aria-hidden="true" class="line-numbers-rows"><
 <p align="center"> <img src="https://cdn.jsdelivr.net/gh/ShiHantian/image_host@main/markdown_images/main-2024-10-01-19-51-09.png" alt="main-2024-10-01-19-51-09" width=70%" /> </p>
 
 <p>图片来自官方wiki。参数文件中tagSize和tagSpacing两个参数的含义如图所示</p>
-<p>标定板yaml文件<code>aprilgrid_A4.yaml</code>：</p>
+<p>标定板yaml文件 <code>aprilgrid_A4.yaml</code>：</p>
 <pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">target_type</span><span class="token punctuation">:</span> <span class="token string">'aprilgrid'</span> <span class="token comment">#gridtype</span>
 <span class="token key atrule">tagCols</span><span class="token punctuation">:</span> <span class="token number">6</span>               <span class="token comment">#number of apriltags</span>
 <span class="token key atrule">tagRows</span><span class="token punctuation">:</span> <span class="token number">6</span>               <span class="token comment">#number of apriltags</span>
@@ -176,12 +177,15 @@ rostopic hz /mavros/imu/data<span aria-hidden="true" class="line-numbers-rows"><
 <li>另开两个终端，调整两个摄像头的话题频率</li>
 </ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rosrun topic_tools throttle messages /camera/infra1/image_rect_raw <span class="token number">4.0</span> /infra1_image_rect_raw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rosrun topic_tools throttle messages /camera/infra2/image_rect_raw <span class="token number">4.0</span> /infra2_image_rect_raw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>两个新的话题将以4Hz的频率发布图像数据，话题名称分别为infra1_image_rect_raw和infra2_image_rect_raw</p>
 <ol start="3">
 <li>再开两个终端，使用rqt_image_view监测摄像头画面</li>
 </ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rqt_image_view /infra1_image_rect_raw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rqt_image_view /infra2_image_rect_raw<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ol start="4">
@@ -190,8 +194,8 @@ rostopic hz /mavros/imu/data<span aria-hidden="true" class="line-numbers-rows"><
 <p>录制时的手法演示：<a target="_blank" rel="noopener" href="https://youtu.be/puNXsnrYWTY?si=UdVQJvBTxc3PWFxg">Youtube-DIY Indoor Autonomous Drone! - Part 2 (Kalibr &amp; Calibration)</a> 第57秒开始</p>
 <ul>
 <li>录制150秒</li>
-<li>保存到<code>~/Desktop/camera_calibration/</code>路径下，文件名为”camera_calibration+时间戳+.bag”</li>
-<li>记录<code>infra1_image_rect_raw</code>和<code>infra2_image_rect_raw</code>两个话题</li>
+<li>保存到 <code>~/Desktop/camera_calibration/</code>路径下，文件名为”camera_calibration+时间戳+.bag”</li>
+<li>记录 <code>infra1_image_rect_raw</code>和 <code>infra2_image_rect_raw</code>两个话题</li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rosbag record <span class="token punctuation">\</span>
   <span class="token parameter variable">--duration</span><span class="token operator">=</span><span class="token number">150</span> <span class="token punctuation">\</span>
@@ -334,7 +338,7 @@ rosrun kalibr kalibr_calibrate_imu_camera \
 <li>bag 后面加数据包文件</li>
 <li>bag-from-to 后面加数据包开始和结束时间（单位：秒）（这里选择10~110秒弃用开始和结尾的一小段数据）</li>
 </ul>
-<h2 id="References-Navigation"><a href="#References-Navigation" class="headerlink" title="References &amp; Navigation"></a>References &amp; Navigation</h2><p>[0] 首先感谢wh浩哥和师兄lcz泽总的帮助🤩🤩🤩</p>
+<h2 id="References-Navigation"><a href="#References-Navigation" class="headerlink" title="References &amp; Navigation"></a>References &amp; Navigation</h2><p>[0] 首先感谢浩哥和师兄泽总的帮助🤩🤩🤩</p>
 <p>[1] <a target="_blank" rel="noopener" href="https://github.com/ethz-asl/kalibr"><strong>Kalibr</strong> github repository</a></p>
 <p>[2] <a target="_blank" rel="noopener" href="https://github.com/gaowenliang/imu_utils"><strong>imu_utils</strong> github repository</a></p>
 <p>[3] <a target="_blank" rel="noopener" href="https://github.com/gaowenliang/code_utils"><strong>code_utils</strong> github repository</a></p>
